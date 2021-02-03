@@ -204,7 +204,13 @@ Do it! 안드로이드 프로그래밍
             button1.setLayoutParams(params);
             mainLayout.addView(button1);                                //레이아웃에 추가
 
-            setContentView(R.layout.activity_main);                     //새로 만든 레이아웃을 화면에 설정
+            setContentView(mainLayout);                     //새로 만든 레이아웃을 화면에 설정
         }
     }
-
+    
+#### 프로젝트를 처음 만들면
+    자동으로 MainActivity.java 생성
+    AndroidManifest.xml 파일 안에 자동으로 등록
+    -> 새로 추가한 액티비티로 변경하려면 
+        AndroidManifest.xml 파일에서
+        <activity android:name=".MainActivity"> 부분 수정
