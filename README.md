@@ -30,10 +30,8 @@ Do it! 안드로이드 프로그래밍
   안드로이드에선 가상의 플랫폼이라는 의미로 AVD(Android Virtual Device) 용어 사용
   
 > 안드로이드 스튜디오 업데이트 :
-
-> 실행 시 시작화면 아래쪽 Configure - Check for Updates 최신 버전 확인 가능 
-
-> 최신 플랫폼 추가 설치시 Configure - SDK Manager 최신 버전 선택 후 설치
+>> 실행 시 시작화면 아래쪽 Configure - Check for Updates 최신 버전 확인 가능 
+>>> 최신 플랫폼 추가 설치시 Configure - SDK Manager 최신 버전 선택 후 설치
 
 # 2.안드로이드 스튜디오
 ## [ New Project 생성 시 ]
@@ -41,7 +39,8 @@ Do it! 안드로이드 프로그래밍
     
 - Package name : 영문 소문자로 시작해야 함
     - 앱을 구분하는 고유한 값
-         > 실무에선 인터넷 사이트 주소처럼 짓는 경우 많음
+    
+            실무에선 인터넷 사이트 주소처럼 짓는 경우 많음
     - Save location : 프로젝트 저장 위치
     - Language : Java / Kotlin
 
