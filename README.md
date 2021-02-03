@@ -30,8 +30,10 @@ Do it! 안드로이드 프로그래밍
   안드로이드에선 가상의 플랫폼이라는 의미로 AVD(Android Virtual Device) 용어 사용
   
 > 안드로이드 스튜디오 업데이트 :
->> 실행 시 시작화면 아래쪽 Configure - Check for Updates 최신 버전 확인 가능 
->>> 최신 플랫폼 추가 설치시 Configure - SDK Manager 최신 버전 선택 후 설치
+
+> 실행 시 시작화면 아래쪽 Configure - Check for Updates 최신 버전 확인 가능 
+
+> 최신 플랫폼 추가 설치시 Configure - SDK Manager 최신 버전 선택 후 설치
 
 # 2.안드로이드 스튜디오
 ## [ New Project 생성 시 ]
