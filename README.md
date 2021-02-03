@@ -155,7 +155,7 @@ Do it! 안드로이드 프로그래밍
     제약 조건(Constraint) 기반 모델
     제약 조건을 사용해 화면을 구성하는 방법
     안드로이드 스튜디오에서 자동으로 설정하는 디폴트 레이아웃
-#### [LinearLayout](#-리니어-레이아웃)
+#### LinearLayout
     박스(Box) 모델
     한 쪽 방향으로 차례대로 뷰를 추가하며 화면을 구성하는 방법
     뷰가 차지할 수 있는 사각형 영역을 담당
@@ -181,3 +181,30 @@ Do it! 안드로이드 프로그래밍
     orientation 속성 사용
     가로 방향 : horizontal
     세로 방향 : vertical
+    
+#### 자바 코드에서의 화면 구성
+
+        public class LayoutCodeActivity extends AppCompatActivity {     //하나의 화면을 액티비티라고 부름
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+
+            LinearLayout mainLayout = new LinearLayout(this);           //new 연산자로 LinearLayout 만들고
+            mainLayout.setOrientation(LinearLayout.VERTICAL);           //방향 설정
+
+            LinearLayout.LayoutParams params =                          //레이아웃 안에 추가될 뷰들에
+                    new LinearLayout.LayoutParams(                      //설정할 파라미터 생성
+                            LinearLayout.LayoutParams.MATCH_PARENT,
+                            LinearLayout.LayoutParams.WRAP_CONTENT
+                    );
+
+            Button button1 = new Button(this);                          //버튼에 파라미터 설정하고
+            button1.setText("Button1");
+            button1.setLayoutParams(params);
+            mainLayout.addView(button1);                                //레이아웃에 추가
+
+            setContentView(R.layout.activity_main);                     //새로 만든 레이아웃을 화면에 설정
+        }
+    }
+
