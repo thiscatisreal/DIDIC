@@ -181,6 +181,7 @@ Do it! 안드로이드 프로그래밍
 
 ### 리니어 레이아웃
 **필수 속성 = 방향**
+
     orientation 속성 사용
     가로 방향 : horizontal
     세로 방향 : vertical
