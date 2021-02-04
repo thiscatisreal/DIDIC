@@ -175,7 +175,7 @@ Do it! 안드로이드 프로그래밍
 
 ***
 
-### 리니어 레이아웃<a id="linearlayout"></a>
+### 리니어 레이아웃 <a id="linearlayout"></a>
 **필수 속성 = 방향**
 
     orientation 속성 사용
