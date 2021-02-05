@@ -132,6 +132,7 @@ Do it! 안드로이드 프로그래밍
 - 뷰의 영역(Box) : 뷰는 테두리를 기준으로 바깥쪽과 안쪽 공간을 띄움
 - Margin : 테두리의 바깥쪽 공간
 - Padding : 테두리의 안쪽 공간
+- Cell : Margin + Padding
 - Content : 내용물
 
 ### 뷰의 배경색
@@ -230,13 +231,13 @@ Do it! 안드로이드 프로그래밍
 2. 텍스트뷰 글자를 왼쪽으로 정렬
 
         <TextView
-        android:id="@+id/textView"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:gravity="left"
-        android:textColor="#ffff0000"
-        android:textSize="32sp"
-        android:text="left"/>
+            android:id="@+id/textView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:textColor="#ffff0000"
+            android:textSize="32sp"
+            android:text="left"/>
 > 버튼이나 텍스트뷰의 크기를 wrap_content로 지정하면 버튼 안에 들어 있는 글자에 맞게 뷰의 크기가 결정되므로
 내부의 여유공간이 없어져서 gravity 속성을 지정하는 게 의미가 없음
 
