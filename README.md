@@ -288,3 +288,44 @@ Do it! 안드로이드 프로그래밍
 > XML 레이아웃에서 설정한 id는 소스코드에서 참조 가능
 <br> - XML 레이아웃 파일에서 id 지정할 때 -> @+id/아이디
 <br> - 자바 소스 코드에서 참조할 때 -> R.id.아이디
+#### 스크롤뷰
+    추가된 뷰의 영역이 한눈에 다 보이지 않을 때 사용
+- MainActivity.java
+
+        public class MainActivity extends AppCompatActivity {
+        ScrollView scrollView;
+        ImageView imageView;
+        BitmapDrawable bitmap;
+
+        @Override
+        protected void onCreate(Bundle savedInstanceState) {
+            super.onCreate(savedInstanceState);
+            setContentView(R.layout.activity_main);
+
+            scrollView = findViewById(R.id.scrollView);                         //레이아웃에서 정의된 뷰 객체 참조
+            imageView = findViewById(R.id.imageView);
+            scrollView.setHorizontalScrollBarEnabled(true);                     //수평 스크롤바 사용 기능 설정
+
+            Resources res = getResources();                                     //리소스의 이미지 참조
+            bitmap = (BitmapDrawable) res.getDrawable(R.drawable.image01);
+            int bitmapWidth = bitmap.getIntrinsicWidth();
+            int bitmapHeight = bitmap.getIntrinsicHeight();
+
+            imageView.setImageDrawable(bitmap);                                 //이미지 리소스와 크기 설정
+            imageView.getLayoutParams().width = bitmapWidth;
+            imageView.getLayoutParams().height = bitmapHeight;
+        }
+        public void onButton1Clicked(View v) {
+            changeImage();
+        }
+        private void changeImage() {                                            //다른 이미지 리소스로 변경
+            Resources res = getResources();
+            bitmap = (BitmapDrawable) res.getDrawable(R.drawable.image02);
+            int bitmapWidth = bitmap.getIntrinsicWidth();                       //이미지의 가로, 세로 길이 알아냄
+            int bitmapHeight = bitmap.getIntrinsicHeight();
+
+            imageView.setImageDrawable(bitmap);
+            imageView.getLayoutParams().width = bitmapWidth;                    //알아낸 크기를 객체의 속성으로 설정
+            imageView.getLayoutParams().height = bitmapHeight;
+        }
+  
