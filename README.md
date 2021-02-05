@@ -214,3 +214,34 @@ Do it! 안드로이드 프로그래밍
     -> 새로 추가한 액티비티로 변경하려면 
         AndroidManifest.xml 파일에서
         <activity android:name=".MainActivity"> 부분 수정
+#### 뷰 정렬
+- layout_gravity    
+    : 부모 컨테이너의 여유 공간에 뷰가 모두 채워지지 않아 여유 공간이 생겼을 때 여유 공간 안에서 뷰를 정렬    
+- gravity   
+    : 뷰 안에 표시하는 내용물을 정렬
+1. 버튼을 왼쪽으로 정렬  
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="left"
+            android:text="left" />
+2. 텍스트뷰 글자를 왼쪽으로 정렬
+
+        <TextView
+        android:id="@+id/textView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="left"
+        android:textColor="#ffff0000"
+        android:textSize="32sp"
+        android:text="left"/>
+> 버튼이나 텍스트뷰의 크기를 wrap_content로 지정하면 버튼 안에 들어 있는 글자에 맞게 뷰의 크기가 결정되므로
+내부의 여유공간이 없어져서 gravity 속성을 지정하는 게 의미가 없음
+
+- baselineAligned   
+    : 텍스트와 옆의 텍스트뷰, 버튼에 들어 있는 텍스트들의 높이를 맞춤  
+      but, 텍스트 정렬이 우선이기 때문에 뷰의 배치가 이상해질 수 있음    
+      
+> 제약 레이아웃에선 뷰의 가운데 연결점을 서로 연결하면 텍스트 높이가 맞춰짐
