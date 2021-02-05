@@ -251,3 +251,10 @@ Do it! 안드로이드 프로그래밍
     : 부모 컨테이너에 추가한 뷰들의 공간을 제외한 여유 공간을 분할, 할당 가능
 
 ### 상대 레이아웃
+**상대적인 위치를 이용해 뷰의 위치 결정**
+- 부모 레이아웃의 시작 부분에 붙여라   
+    : android:layout_alignParentStart="true"
+- 버튼이 다른 버튼의 위쪽까지만 차지하도록 배치
+    : android:layout_**above**="@+id/button2"
+- 버튼이 다른 버튼의 아래쪽까지만 차지하도록 배치    
+    : android:layout_**below**="@+id/button3"
