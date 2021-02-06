@@ -9,7 +9,7 @@ Do it! 안드로이드 프로그래밍
 ### 둘째마당
 1. [View](#1-View)
 2. [레이아웃](#2-레이아웃)
-3.
+3. [기본 위젯과 드로어블](#3-기본-위젯과-드로어블)
 4.
 5.
     
@@ -328,4 +328,23 @@ Do it! 안드로이드 프로그래밍
             imageView.getLayoutParams().width = bitmapWidth;                    //알아낸 크기를 객체의 속성으로 설정
             imageView.getLayoutParams().height = bitmapHeight;
         }
-  
+***
+## 3. 기본 위젯과 드로어블
+### 텍스트뷰
+- text      
+    : 텍스트뷰의 문자열을 설정하는 필수 속성     
+    1. text 속성 값으로 직접 문자열을 넣는 방법    
+    2. /app/res/values 폴더에서 strings.xml 파일에 작성한 문자열을 지정하는 방법 (권장)   
+        text 속성에서 @string/... 형식으로 참조
+- textColor     
+    : 문자열의 색상 설정. #AARRGGBB 포맷 사용
+- textSize      
+    : 문자열의 크기 설정 (sp 권장)
+- textStyle     
+    : 문자열의 스타일 속성 설정    
+      normal, bold 등 | 기호 공백 없이 사용해서 중복 지정 가능
+- typeFace      
+    : 문자열의 폰트 설정
+- maxLines      
+    : 문자열의 최대 줄 수 설정    
+      한 줄로만 표시하고 싶을 때 = 1로 설정하면 영역을 넘어가는 부분은 표시되지 않음
