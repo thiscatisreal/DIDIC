@@ -430,4 +430,70 @@ Do it! 안드로이드 프로그래밍
                 public void onTextChanged (CharSequence s, int start, int before, int count)
         - setFilters() : InputFilter 객체를 파라미터로 전달해서 LengthFilter() 메서드로 입력될 문자열의 길이 값 설정 가능
 ### 뷰의 배경 이미지
-Drawable : 상태에 따라 그래픽이나 이미지가 선택적으로 보이게 함 
+Drawable : 상태에 따라 그래픽이나 이미지가 선택적으로 보이게 함    
+버튼의 Background에 이미지를 추가해서 버튼의 모양 바꿀 수 있음
+### Drawable
+뷰에 설정할 수 있는 객체로 그 위에 그래픽을 그릴 수 있다   
+    - BitmapDrawable : 이미지 파일을 보여줄 때 사용     
+    - StateListDrawable : 상태별로 다른 그래픽을 참조할 수 있음     
+    - TransitionDrawable : 두 개의 Drawable이 서로 바뀌도록 만들 수 있음       
+    - ShapeDrawable : 색상과 그라데이션을 포함해서 도형 모양 정의 가능   
+    - InsetDrawable : 지정한 거리만큼 안쪽으로 들어오게 할 수 있음     
+    - Clip-Drawable : 레벨 값을 기준으로 다른 Drawable들을 클리핑      
+    - ScaleDrawable : 레벨 값을 기준으로 다른 Drawable의 크기 변경 가능      
+#### 상태 드로어블
+가장 많이 사용하는 드로어블 중 하나로 뷰의 상태에 따라 뷰에 보여줄 그래픽을 다르게 지정 가능   
+Drawable Layout에서 <selector> - <item> tag에서 이미지나다른 그래픽 설정 가능
+    
+    <item android:state_pressed="true"                  //뷰가 눌렸을 때 finger.png 보여줌
+        android:drawable="@drawable/finger_pressed"/>
+
+    <item android:drawable="@drawable/finger"/>
+    
+    XML파일에서도 버튼의 background 값을 @drawable/finger_drawable로 변경하면 동일한 효과
+#### 셰이프 드로어블
+많이 쓰이는 드로어블로 XML로 도형을 그릴 수 있게 해주는 드로어블
+
+    <shape xmlns:android="http://schemas.android.com/apk/res/android"   //최상위 태그 <shape>
+        android:shape="rectangle">                                      //속성 rectangle (oval = 타원)
+
+        <size android:width="200dp"         //도형의 크기(가로x세로)
+            android:height="120dp"/>
+        <stroke android:width="1dp"         //테두리 선(굵기, 색상)
+            android:color="#0000ff"/>
+        <solid android:color="#aaddff"/>    //도형의 안쪽 채움 색상
+        <padding android:bottom="1dp"/>     //아래쪽에만 padding 부여
+
+    </shape>
+배경색 그라데이션 효과
+
+    <gradient
+        android:startColor="#7288DB"        //시작, 가운데, 끝부분 색상 지정
+        android:centerColor="3250B4"
+        android:endColor="#254095"
+        android:angle="90"
+        android:centerY="0.5"
+        />
+
+    <corners android:radius="2dp"/>
+버튼의 배경을 투명하게 만들어 테두리만 있는 버튼     
+
+    <layer-list xmlns:android="http://schemas.android.com/apk/res/android">     //<layout_list> 태그 사용
+
+    <item>
+        <shape android:shape="rectangle">
+            <stroke android:width="1dp" android:color="#BE55DA"/>
+            <solid android:color="#0000000"/>
+            <size android:width="200dp" android:height="100dp"/>
+        </shape>
+    </item>
+
+    <item android:top="1dp" android:bottom="1dp"                    //뷰의 테두리 선으로부터 바깥으로 얼마만큼 띄울지
+        android:right="1dp" android:left="1dp">
+        <shape android:shape="rectangle">
+            <stroke android:width="1dp" android:color="#FF55DA"/>   //테두리 선
+            <solid android:color="#0000000"/>                       //안쪽 투명하게
+        </shape>
+    </item>
+
+    </layer-list>
