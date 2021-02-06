@@ -375,7 +375,7 @@ Do it! 안드로이드 프로그래밍
     : 이미지를 화면에 표시할 때 사용하는 가장 간단한 위젯
     - 이미지뷰에 이미지를 나타내는 방법
     1. /app/res/drawable 폴더에 저장한 이미지 파일을 복사 & 붙여넣기      
-    2. app:srcCompat 속성 값 = @drawable/이미지파일명 (확장자 제외)
+    2. app:srcCompat 속성 값 = @drawable/이미지파일명 (확장자 제외)   
     - android:src or app:srcCompat      
         : 원본 이미지 설정. 이미지뷰는 내용물이 지정되지 않으면 크기 확인 불가해서 필수로 설정해야 함
     - maxWidth, maxHeight       
@@ -384,9 +384,22 @@ Do it! 안드로이드 프로그래밍
         : 이미지뷰에 보이는 이미지의 색상 설정
     - scaleType     
         : 이미지뷰의 크기에 맞게 원본 이미지를 자동으로 늘리거나 줄여서 보여줄 때 사용   
-          fitXY, centerCrop 등의 값 사용 가능
+          fitXY, centerCrop 등의 값 사용 가능      
 > 해상도별 drawable 폴더 
 <br> - 초고해상도 : /app/res/drawable-xhdpi, xxhdpi, xxxhdpi
 <br> - 고해상도 : /app/res/drawable-hdpi
 <br> - 중간해상도 : /app/res/drawable-mdpi
 <br> - 저해상도 : /app/res/drawable_ldpi
+    - 커서 관련 속성      
+        - selectAllOnFocus : true로 설정 시 포커스를 받을 때 문자열 전체가 선택됨       
+        - cursorVisible : false로 설정 시 커서 보이지 않음     
+        그 외에도
+        
+         public int getSelectionStart()                      //선택된 영역의 시작점 알려줌
+         public int getSelectionEnd()                        //선택된 영역의 끝점 알려줌. 선택 영역 없을 시 현재 위치 알려줌
+         public void setSelection(int start, int stop)       //선택 영역 지정
+         public void setSelection(int index)                 
+         public void selectAll()                             //전체 문자열 선택
+         public void extendSelection(int index)              //선택 영역 확장
+         
+        - 자동 링크 관련 속성
