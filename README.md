@@ -403,8 +403,8 @@ Do it! 안드로이드 프로그래밍
              public void selectAll()                             //전체 문자열 선택
              public void extendSelection(int index)              //선택 영역 확장
          
-        - 자동 링크 관련 속성   
-            : autoLink 속성을 true로 설정하면 링크 색상을 표시하고 접속 가능케 함
-        - 줄 간격 조정 관련 속성     
-              - lineSpacingMultiplier : 기본 줄 간격 배수로 설정할 때 사용
-              - lineSpacingExtra : 여유 값으로 설정할 때 사용 
+   - 자동 링크 관련 속성   
+        : autoLink 속성을 true로 설정하면 링크 색상을 표시하고 접속 가능케 함
+   - 줄 간격 조정 관련 속성     
+        - lineSpacingMultiplier : 기본 줄 간격 배수로 설정할 때 사용    
+        - lineSpacingExtra : 여유 값으로 설정할 때 사용   
