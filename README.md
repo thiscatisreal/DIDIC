@@ -497,3 +497,36 @@ Drawable Layout에서 <selector> - <item> tag에서 이미지나다른 그래픽
     </item>
 
     </layer-list>
+### 이벤트 처리
+터치 이벤트와 키 이벤트, 클릭 이벤트
+클릭 이벤트
+
+    버튼 태그에 onClick 속성 추가 -> 발생하는 이벤트 처리 가능
+    속성 값에 소스코드에서 정의할 메서드 이름을 넣으면 지정한 메서드로 전달
+    like setOnClickListener() 
+이와 같은 이벤트 처리 방식은 화면에서 발생하는 이벤트를 버튼과 같은 위젯 객체에 전달 후 이후 처리 과정을
+버튼에 위임한다고 해서 **'위임모델(Delegation Model)'** 이라고 부름.       
+위임모델은 각각의 이벤트를 처리할 수 있는 리스터 인터페이스 등록 가능(OnClickListener 또한)
+[대표적인 이벤트 처리 메서드]   
+    
+    boolean onTouchEvent (MotionEvent event)                //MothionEvent : 터치시 발생한 이벤트
+    boolean onKeyDown (int keyCode, KeyEvent event)         //KeyEvent : 키 입력시 발생하는 이벤트
+    boolean onKeyUp (int keyCode, KeyEvent event)
+이 메서드들은 뷰를 상속하여 재정의 가능
+Ex) Buton 클래스 상속하여 MyButton의 새로운 클래스로 재정의
+Or, 기존 뷰 객체에서 이벤트를 처리하려면 **리스너를 설정하는 메서드를 호출** 해야한다.
+
+    View.OnTouchListener : boolean onTouch (View v, MotionEvent event)           //onTouch() : 사용자가 손으로 터치할 때마다 발생하는 이벤트 처리 가능
+    View.OnKeyListener : boolean onKey (View v, int keyCode, KeyEvent event)     //onKey() : 키 입력이 발생할 때마다 이벤트 처리 가능
+    View.OnClickListener : void onClick (View v)
+    View.OnFocusChangeListener : void onFocusChange (View v, boolean hasFocus)   //FocusChange : 뷰에 포커스가 있/없을때 발생
++ 제스쳐 이벤트 : 터치 이벤트 중에서 스크롤과 같이 일정 패턴으로 구분되는 이벤트
+    - onDown() : 화면이 눌렸을 경우
+    - onShowPress() : 화면이 눌렸다 떼어지는 경우
+    - onSingleTapUp() : 화면이 한 손가락으로 눌렸다 떼어지는 경우
+    - onSingleTapConfirmed() : 화면이 한 손가락으로 눌려지는 경우
+    - onDoubleTap() : 화면이 두 손가락으로 눌려지는 경우
+    - onDoubleTapEvent() : 화면이 두 손가락으로 눌려진 상태에서 떼거나 이동하는 등 세부적인 액션을 취하는 경우
+    - onScroll() : 화면이 눌린 채 일정한 속도와 방향으로 움직였다 떼는 경우
+    - onFling() : 화면이 눌린 채 가속도를 붙여 손가락을 움직였다 떼는 경우
+    - onLongPress() : 화면을 손가락으로 오래 누르는 경우
