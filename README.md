@@ -390,16 +390,21 @@ Do it! 안드로이드 프로그래밍
 <br> - 고해상도 : /app/res/drawable-hdpi
 <br> - 중간해상도 : /app/res/drawable-mdpi
 <br> - 저해상도 : /app/res/drawable_ldpi
-    - 커서 관련 속성      
-        - selectAllOnFocus : true로 설정 시 포커스를 받을 때 문자열 전체가 선택됨       
-        - cursorVisible : false로 설정 시 커서 보이지 않음     
-        그 외에도
+
+   - 커서 관련 속성      
+       - selectAllOnFocus : true로 설정 시 포커스를 받을 때 문자열 전체가 선택됨       
+       - cursorVisible : false로 설정 시 커서 보이지 않음     
+         그 외에도
         
-         public int getSelectionStart()                      //선택된 영역의 시작점 알려줌
-         public int getSelectionEnd()                        //선택된 영역의 끝점 알려줌. 선택 영역 없을 시 현재 위치 알려줌
-         public void setSelection(int start, int stop)       //선택 영역 지정
-         public void setSelection(int index)                 
-         public void selectAll()                             //전체 문자열 선택
-         public void extendSelection(int index)              //선택 영역 확장
+             public int getSelectionStart()                      //선택된 영역의 시작점 알려줌
+             public int getSelectionEnd()                        //선택된 영역의 끝점 알려줌. 선택 영역 없을 시 현재 위치 알려줌
+             public void setSelection(int start, int stop)       //선택 영역 지정
+             public void setSelection(int index)                 
+             public void selectAll()                             //전체 문자열 선택
+             public void extendSelection(int index)              //선택 영역 확장
          
-        - 자동 링크 관련 속성
+        - 자동 링크 관련 속성   
+            : autoLink 속성을 true로 설정하면 링크 색상을 표시하고 접속 가능케 함
+        - 줄 간격 조정 관련 속성     
+              - lineSpacingMultiplier : 기본 줄 간격 배수로 설정할 때 사용
+              - lineSpacingExtra : 여유 값으로 설정할 때 사용 
