@@ -331,20 +331,32 @@ Do it! 안드로이드 프로그래밍
 ***
 ## 3. 기본 위젯과 드로어블
 ### 텍스트뷰
-- text      
+- **text**      
     : 텍스트뷰의 문자열을 설정하는 필수 속성     
     1. text 속성 값으로 직접 문자열을 넣는 방법    
     2. /app/res/values 폴더에서 strings.xml 파일에 작성한 문자열을 지정하는 방법 (권장)   
         text 속성에서 @string/... 형식으로 참조
-- textColor     
+- **textColor**     
     : 문자열의 색상 설정. #AARRGGBB 포맷 사용
-- textSize      
+- **textSize**      
     : 문자열의 크기 설정 (sp 권장)
-- textStyle     
+- **textStyle**     
     : 문자열의 스타일 속성 설정    
       normal, bold 등 | 기호 공백 없이 사용해서 중복 지정 가능
-- typeFace      
+- **typeFace**      
     : 문자열의 폰트 설정
-- maxLines      
+- **maxLines**      
     : 문자열의 최대 줄 수 설정    
       한 줄로만 표시하고 싶을 때 = 1로 설정하면 영역을 넘어가는 부분은 표시되지 않음
+- **버튼**    
+    : 사용자가 클릭하면 클릭에 대해 반응하는 위젯으로 텍스트뷰를 상속하여 정의됨
+    1. CompoundButton
+    
+            public boolean isChecked()                  //체크박스, 라디오버튼이 선택됐는지 확인
+            public void setChecked (boolean checked)    //체크 상태 지정
+            public void toggle()
+            
+            void onCheckedChanged(CompoundButton buttonView, boolean isChecked) //버튼의 상태가 바뀌는 것을 알려줌
+    2. RadioButton      
+        : 라디오 그룹 - 라디오 버튼 생성
+        > LinearLayout에서 가운데정렬 : android:gravity = "center_vertical|center_horizontal"
