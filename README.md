@@ -348,15 +348,45 @@ Do it! 안드로이드 프로그래밍
 - **maxLines**      
     : 문자열의 최대 줄 수 설정    
       한 줄로만 표시하고 싶을 때 = 1로 설정하면 영역을 넘어가는 부분은 표시되지 않음
-- **버튼**    
+- **button**    
     : 사용자가 클릭하면 클릭에 대해 반응하는 위젯으로 텍스트뷰를 상속하여 정의됨
-    1. CompoundButton
+    - CompoundButton
     
             public boolean isChecked()                  //체크박스, 라디오버튼이 선택됐는지 확인
             public void setChecked (boolean checked)    //체크 상태 지정
             public void toggle()
             
             void onCheckedChanged(CompoundButton buttonView, boolean isChecked) //버튼의 상태가 바뀌는 것을 알려줌
-    2. RadioButton      
+    - RadioButton      
         : 라디오 그룹 - 라디오 버튼 생성
         > LinearLayout에서 가운데정렬 : android:gravity = "center_vertical|center_horizontal"
+- **EditText**      
+    : 사용자에게 값을 입력받을 때 사용
+    > inputType : 입력하는 문자의 유형 지정
+    
+         <EditText
+            android:id= "@+id/usernameInput"
+            android:layout_width= "match_parent"
+            android:layout_height= "wrap_content"
+            android:textSize= "24sp"
+            android:inputType= "text"                     //입력되는 글자의 유형 정의
+            android:hint= "이름을 입력하세요."/>           //기본 안내문의 hint 표시
+- **이미지뷰와 이미지버튼**       
+    : 이미지를 화면에 표시할 때 사용하는 가장 간단한 위젯
+    - 이미지뷰에 이미지를 나타내는 방법
+    1. /app/res/drawable 폴더에 저장한 이미지 파일을 복사 & 붙여넣기      
+    2. app:srcCompat 속성 값 = @drawable/이미지파일명 (확장자 제외)
+    - android:src or app:srcCompat      
+        : 원본 이미지 설정. 이미지뷰는 내용물이 지정되지 않으면 크기 확인 불가해서 필수로 설정해야 함
+    - maxWidth, maxHeight       
+        : 이미지가 표시되는 최대 폭, 높이로 설정하지 않으면 원본 이미지 그대로 나타남
+    - tint      
+        : 이미지뷰에 보이는 이미지의 색상 설정
+    - scaleType     
+        : 이미지뷰의 크기에 맞게 원본 이미지를 자동으로 늘리거나 줄여서 보여줄 때 사용   
+          fitXY, centerCrop 등의 값 사용 가능
+> 해상도별 drawable 폴더 
+<br> - 초고해상도 : /app/res/drawable-xhdpi, xxhdpi, xxxhdpi
+<br> - 고해상도 : /app/res/drawable-hdpi
+<br> - 중간해상도 : /app/res/drawable-mdpi
+<br> - 저해상도 : /app/res/drawable_ldpi
