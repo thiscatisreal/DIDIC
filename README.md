@@ -408,3 +408,26 @@ Do it! 안드로이드 프로그래밍
    - 줄 간격 조정 관련 속성     
         - lineSpacingMultiplier : 기본 줄 간격 배수로 설정할 때 사용    
         - lineSpacingExtra : 여유 값으로 설정할 때 사용   
+   - 대소문자 표시 관련 속성      
+        : capitalize에서 characters, words, sentences 등으로 맨 앞글자를 대문자로 지정 가능
+   - 줄임 표시 관련 속성    
+        : ellipsize 속성으로 입력 내용의 생략 부분 설정 가능     
+            - none : default값으로 뒷부분을 생략     
+            - start, middle, end : 각각 시작, 중간, 끝부분을 생략       
+            - maxLines : 한 줄로 표시    
+   - 힌트 표시 관련 속성    
+        : 어떤 내용을 입력하라고 안내문 표시. textColorHint로 색상 지정 가능
+   - 편집 기능 관련 속성    
+        : EditText를 수정하지 못하게 하고 싶을 때 editable 속성을 false로 설정
+   - 문자열 변경 처리 관련 속성    
+        - getText() : 입력된 문자 확인. Editable 객체를 리턴함   
+                      리턴된 객체를 toString() 메서드를 이용하면 확인 가능
+        - TextChangedListener : 사용자의 입력에 의해 바뀔 때마다 확인하는 기능
+        
+                public void addTextChangedListener(TextWatcher watcher)
+                public void beforeTextChanged (CharSequence s, int start, int count, int after)
+                public void after TextChanged (Editable s)
+                public void onTextChanged (CharSequence s, int start, int before, int count)
+        - setFilters() : InputFilter 객체를 파라미터로 전달해서 LengthFilter() 메서드로 입력될 문자열의 길이 값 설정 가능
+### 뷰의 배경 이미지
+Drawable : 상태에 따라 그래픽이나 이미지가 선택적으로 보이게 함 
