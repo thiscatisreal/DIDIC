@@ -546,11 +546,30 @@ onKeyDown() 메서드를 재정의하여 처리
     boolean onKeyDonw (int keyCode, KeyEvent event)         //KeyCode : 어떤 키가 사용되는지 구별
     boolean onKey (View v, int keyCode, KeyEvent event)     //KeyEvent : 키 입력 이벤트에 대한 정보
 > 시스템 버튼인 BACK : 키 이벤트로 처리 가능하며 HOME, RECENT APPS 버튼은 제어되지 않고 입력됐는지 정보만 받을 수 있다.
-<br> Back버튼 처리 : void onBackPressed()   
+<br> Back버튼 처리 : void onBackPressed()       
+
 [ OnKeyListener의 KeyCode 대표적인 키 값 ]     
     - KEYCODE_DPAD_LEFT : 왼쪽 화살표 (RIGHT, UP, DOWN, CENTER)      
     - KEYCODE_CALL :통화 버튼 (ENDCALL)      
     - KEYCODE_BACK : 뒤로 가기 버튼   
-    - KEYCODE_VOLUME_UP :소리 크기 증가 버튼 (DOWN)
+    - KEYCODE_VOLUME_UP :소리 크기 증가 버튼 (DOWN)     
     - KEYCODE_0 ~ 9 : 숫자 0~9까지의 값 (A ~ Z)   
     - KEYCODE_CAMERA : 카메라  
+#### 단말 방향을 전환했을 때 이벤트 처리
+방향이 전환되면 XML 레이아웃이 다르게 보여야 함 - 액티비티 재생성
+res - Android Resource Directory 생성 (Directory name : layout-land)
+- onSaveInstanceState() : 액티비티 소멸시 상태 저장시켜뒀다가 복원
+### 토스트
+간단한 메시지를 잠깐 보여줬다가 없어지는 뷰        
+포커스를 받지 않으므로 대화상자보다 더 쉽고 간단하게 사용 가능     
+앱의 상태와 관계없이 보여줄 수 있음    
+    
+    Toast.makeText(Context context, String message, int duration).show();
+    
+    public void setGravity(int gravity, int xOffset, int yOffset)       //토스트 뷰가 보이는 위치 지정
+    public void setMargin(float horizontalMargin, float verticalMargin) //외부 여백 지정. 중앙이나 우측 하단에 배치 가능
+- 토스트 모양 바꾸기
+    1. LayoutInflater 객체 사용해 XML 레이아웃 메모리를 객체화(for loarding)    
+    2. 여기서 XML 레이아웃은 토스트만을 위한 레이아웃      
+    3. background=@drawable/toast - drawble 폴더에 XML 파일 추가   
+    4. shape drawable로 색상 등을 지정     
