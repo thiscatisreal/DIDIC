@@ -573,3 +573,43 @@ res - Android Resource Directory 생성 (Directory name : layout-land)
     2. 여기서 XML 레이아웃은 토스트만을 위한 레이아웃      
     3. background=@drawable/toast - drawble 폴더에 XML 파일 추가   
     4. shape drawable로 색상 등을 지정     
+### 스낵바
+외부 라이브러리로 Material Library 추가해야 사용 가능(but, 안해도 되는 듯)
+
+    public void onButton3Clicked(View v) {
+        Snackbar.make(v, "스낵바입니다.", Snackbar.LENGTH_LONG).show();
+    }
+### 알림 대화상자
+사용자에게 확인 받거나 선택하게 할 때 사용. 보통 일방적으로 메시지 전달할 때 주로 사용
+[ MainActivity.java 에서 ]
+
+    private void showMessage(){                                                        
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);                  //대화상자를 만들기 위한 빌더 객체 생성
+        builder.setTitle("안내");
+        builder.setMessage("종료하시겠습니까?");
+        builder.setIcon(android.R.drawable.ic_dialog_alert);
+
+        builder.setPositiveButton("예", new DialogInterface.OnClickListener(){       //예 버튼 추가
+            public void onClick(DialogInterface dialog, int which){
+                String message = "예 버튼이 눌렸습니다. ";
+                textView.setText(message);
+            }
+        });
+        builder.setNeutralButton("취소", new DialogInterface.OnClickListener(){       //취소 버튼 추가
+            public void onClick(DialogInterface dialog, int which){
+                String message = "취소 버튼이 눌렸습니다. ";
+                textView.setText(message);
+            }
+        });
+        builder.setNegativeButton("아니오", new DialogInterface.OnClickListener(){     //아니오 버튼 추가
+            public void onClick(DialogInterface dialog, int which){
+                String message = "아니오 버튼이 눌렸습니다. ";
+                textView.setText(message);
+            }
+        });
+        AlertDialog dialog = builder.create();      //대화 객체 생성 후 보여주기
+        dialog.show();
+    }
+### 프로그래스 바
+어떤 일의 진행 상태를 중간중간 보여줄 수 있는 가장 좋은 방법 중 하나로
+작업의 진행 정도를 표시하거나 작업이 진행 중임을 사용자에게 알려준다.
