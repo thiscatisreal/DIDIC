@@ -580,7 +580,7 @@ res - Android Resource Directory 생성 (Directory name : layout-land)
         Snackbar.make(v, "스낵바입니다.", Snackbar.LENGTH_LONG).show();
     }
 ### 알림 대화상자
-사용자에게 확인 받거나 선택하게 할 때 사용. 보통 일방적으로 메시지 전달할 때 주로 사용
+사용자에게 확인 받거나 선택하게 할 때 사용. 보통 일방적으로 메시지 전달할 때 주로 사용      
 [ MainActivity.java 에서 ]
 
     private void showMessage(){                                                        
@@ -612,4 +612,14 @@ res - Android Resource Directory 생성 (Directory name : layout-land)
     }
 ### 프로그래스 바
 어떤 일의 진행 상태를 중간중간 보여줄 수 있는 가장 좋은 방법 중 하나로
-작업의 진행 정도를 표시하거나 작업이 진행 중임을 사용자에게 알려준다.
+작업의 진행 정도를 표시하거나 작업이 진행 중임을 사용자에게 알려준다.     
+[ 대표적인 두 가지 형태 ]    
+    - 막대 모양 : 작업의 진행 정도를 알려줌.       
+                 style 속성값 - ?android:attr/progressBarStyleHorizontal       
+    - 원 모양 : 작업이 진행 중임을 알려줌. 원 모양이 반복적으로 표시됨.       
+[ 대표적인 메서드 ]    
+   
+    void setProgress (int progress)         //정수 값을 받아 현재 값으로 설정
+    void inCrememtProgressBy (int diff)     //현재 설정된 값을 기준으로 더하거나 뺌
+    
+    requestWindowFeature(Window.FEATURE_PROGRESS);  //화면에서 차지하는 공간을 줄일 수 있게 타이틀바에 표시(0~10000)
