@@ -499,7 +499,7 @@ Drawable Layout에서 <selector> - <item> tag에서 이미지나다른 그래픽
     </layer-list>
 ### 이벤트 처리
 터치 이벤트와 키 이벤트, 클릭 이벤트
-클릭 이벤트
+#### 클릭 이벤트
 
     버튼 태그에 onClick 속성 추가 -> 발생하는 이벤트 처리 가능
     속성 값에 소스코드에서 정의할 메서드 이름을 넣으면 지정한 메서드로 전달
@@ -519,8 +519,17 @@ Or, 기존 뷰 객체에서 이벤트를 처리하려면 **리스너를 설정�
     View.OnTouchListener : boolean onTouch (View v, MotionEvent event)           //onTouch() : 사용자가 손으로 터치할 때마다 발생하는 이벤트 처리 가능
     View.OnKeyListener : boolean onKey (View v, int keyCode, KeyEvent event)     //onKey() : 키 입력이 발생할 때마다 이벤트 처리 가능
     View.OnClickListener : void onClick (View v)
-    View.OnFocusChangeListener : void onFocusChange (View v, boolean hasFocus)   //FocusChange : 뷰에 포커스가 있/없을때 발생
-+ 제스쳐 이벤트 : 터치 이벤트 중에서 스크롤과 같이 일정 패턴으로 구분되는 이벤트
+    View.OnFocusChangeListener : void onFocusChange (View v, boolean hasFocus)   //FocusChange : 뷰에 포커스가 있/없을때 발생   
++ onTouch() 메서드의 MotionEvent 객체에선 액션 정보나 터치한 곳의 좌표 등이 있음    
+액션 정보는 getAction() 메서드로 확인 가능하며 반환된 값은 MotionEvent 클래스에 정의된 값과 비교하며 상태 알아냄
+    - MotionEvent.ACTION_DOWN : 손가락이 눌렸을 때
+    - MotionEvent.ACTION_MOVE : 손가락이 눌린 상태로 움직일 때
+    - MotioinEvent.ACTION_UP : 손가락이 떼졌을 때       
+    
+    public void println(String data) {      //파라미터로 전달된 글자를 텍스트뷰에 추가해서 보여줌
+        textView.append(data+"\n");
+    }       
+제스쳐 이벤트 : 터치 이벤트 중에서 스크롤과 같이 일정 패턴으로 구분되는 이벤트
     - onDown() : 화면이 눌렸을 경우
     - onShowPress() : 화면이 눌렸다 떼어지는 경우
     - onSingleTapUp() : 화면이 한 손가락으로 눌렸다 떼어지는 경우
@@ -529,4 +538,19 @@ Or, 기존 뷰 객체에서 이벤트를 처리하려면 **리스너를 설정�
     - onDoubleTapEvent() : 화면이 두 손가락으로 눌려진 상태에서 떼거나 이동하는 등 세부적인 액션을 취하는 경우
     - onScroll() : 화면이 눌린 채 일정한 속도와 방향으로 움직였다 떼는 경우
     - onFling() : 화면이 눌린 채 가속도를 붙여 손가락을 움직였다 떼는 경우
-    - onLongPress() : 화면을 손가락으로 오래 누르는 경우
+    - onLongPress() : 화면을 손가락으로 오래 누르는 경우       
+GestureDetector 클래스로 처리된다.
+#### 키 이벤트
+onKeyDown() 메서드를 재정의하여 처리 
+
+    boolean onKeyDonw (int keyCode, KeyEvent event)         //KeyCode : 어떤 키가 사용되는지 구별
+    boolean onKey (View v, int keyCode, KeyEvent event)     //KeyEvent : 키 입력 이벤트에 대한 정보
+> 시스템 버튼인 BACK : 키 이벤트로 처리 가능하며 HOME, RECENT APPS 버튼은 제어되지 않고 입력됐는지 정보만 받을 수 있다.
+<br> Back버튼 처리 : void onBackPressed()   
+[ OnKeyListener의 KeyCode 대표적인 키 값 ]     
+    - KEYCODE_DPAD_LEFT : 왼쪽 화살표 (RIGHT, UP, DOWN, CENTER)      
+    - KEYCODE_CALL :통화 버튼 (ENDCALL)      
+    - KEYCODE_BACK : 뒤로 가기 버튼   
+    - KEYCODE_VOLUME_UP :소리 크기 증가 버튼 (DOWN)
+    - KEYCODE_0 ~ 9 : 숫자 0~9까지의 값 (A ~ Z)   
+    - KEYCODE_CAMERA : 카메라  
