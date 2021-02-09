@@ -98,10 +98,15 @@ onActivityResult() : 새로 띄웠던 액티비티가 응답을 보내면 그 �
     - 액션 : 수행할 기능       
     - 데이터 : 액션이 수행될 대상의 데이터     
 [ 대표적인 사용 예 ]   
-    - ACTION_DIAL tel:01077881234   //주어진 전화번호를 이용해 전화 걸기 화면 보여줌    
-    - ACTION_VIEW tel:01077881234   //위와 동일. URL 유형에 따라 다른 기능 수행 가능     
-    - ACTION_EDIT content://contacts/people/2 //전화번호부 데이터베이스 정보 중 ID값이 2인 정보를 편집하기 위한 화면 보여줌    
-    - ACTION_VIEW content://contacts/people //전화번호부 데이터베이스의 내용을 보여줌     
+    - ACTION_DIAL tel:01077881234   
+        : 주어진 전화번호를 이용해 전화 걸기 화면 보여줌    
+    - ACTION_VIEW tel:01077881234   
+        : 위와 동일. URL 유형에 따라 다른 기능 수행 가능     
+    - ACTION_EDIT content://contacts/people/2   
+        : 전화번호부 데이터베이스 정보 중 ID값이 2인 정보를 편집하기 위한 화면 보여줌    
+    - ACTION_VIEW content://contacts/people     
+        : 전화번호부 데이터베이스의 내용을 보여줌     
+            
 인텐트에 포함된 데이터는 그 포맷이 어떤 것인지 시스템이 확인 후 적절한 액티비티를 자동으로 찾아 보여주기도 한다.
 Ex) http같은 특정 포맷 사용 - MIME 타입으로 구분 (일반적으로 웹서버에서 사용하는 MIME 타입)   
 
