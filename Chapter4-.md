@@ -7,8 +7,8 @@ Do it! 안드로이드 프로그래밍
     1. [레이아웃 인플레이션](#레이아웃-인플레이션)      
     2. [여러 화면 만들고 전환하기](#여러-화면-만들고-화면-간-전환하기)   
     3. [인텐트](#인텐트)      
-    4. 플래그와 부가 데이터      
-    5. 테스크 관리       
+    4. [플래그와 부가 데이터](#플래그와-부가-데이터)      
+    5. [테스크 관리](#테스크-관리)       
 5.    
 6.    
 7.    
@@ -107,8 +107,8 @@ onActivityResult() : 새로 띄웠던 액티비티가 응답을 보내면 그 �
     - ACTION_VIEW content://contacts/people     
         : 전화번호부 데이터베이스의 내용을 보여줌     
             
-인텐트에 포함된 데이터는 그 포맷이 어떤 것인지 시스템이 확인 후 적절한 액티비티를 자동으로 찾아 보여주기도 한다.
-Ex) http같은 특정 포맷 사용 - MIME 타입으로 구분 (일반적으로 웹서버에서 사용하는 MIME 타입)   
+> 인텐트에 포함된 데이터는 그 포맷이 어떤 것인지 시스템이 확인 후 적절한 액티비티를 자동으로 찾아 보여주기도 한다.
+<br> Ex) http같은 특정 포맷 사용 - MIME 타입으로 구분 (일반적으로 웹서버에서 사용하는 MIME 타입)   
 
 [ 인텐트의 생성자 ]
 
@@ -129,3 +129,37 @@ Ex) http같은 특정 포맷 사용 - MIME 타입으로 구분 (일반적으로 
         : 인텐트에 사용될 컴포넌트 클래스 이름을 명시적으로 지정    
     - Extra Data    
         : 추가적인 정보를 넣을 수 있는 번들 객체
+## 플래그와 부가 데이터
+액티비티는 액티비티 매니저라는 객체에 의해 액티비티 스택이라는 것으로 관리된다.    
+-> 액티비티를 차곡차곡 쌓아두며 LIFO     
+    
+BUT 동일한 액티비티를 여러번 실행 - 동일한 액티비티가 여러개 스택에 쌓임 - 문제 발생 !       
+    -> 이러한 문제 해결사 = **플래그 !**   
+    
+        FLAG_ACTIVITY_SINGLE_TOP        //액티비티 생성 시 이미 생성된 액티비티가 존재하면 그거 써라
+        FLAG_ACTIVITY_NO_HISTORY        //처음 이후에 실행된 액티비티는 스택에 추가되지 않음
+        FLAG_ACTIVITY_CLEAR_TOP         //이 액티비티 위의 다른 액티비티들을 모두 종료
+        
+### 부가 데이터
+번들 객체 안에 넣은 데이터로 시스템에서는 건드리지 않고 다른 앱 구성 요소로 전달      
+번들 안에 문자열이나 정수같은 부가 데이터를 넣을 땐 Key, Value를 쌍으로 만들어 넣음    
+
+[ 이진 값을 넣거나 뺄 때 사용하는 대표적인 메서드 ]     
+
+    Intent putExtra(Stirng name, String value)
+    Intent putExtra(String name, int value)
+    Intent putExtra(String name, boolean value)
+    
+    String getStringExtra(String name)          //get ~() : 데이터 값이 없으면 디폴트로 설정한 defaultValue로 반환
+    int getIntExtra(String name, int defaultValue) 
+    boolean getBooleanExtra(String name, boolean defaultValue)
+    
+- 객체 자료형을 전달하고 싶은 경우    
+    1. 바이트 배열로 변환       
+    2. Serializable 인터페이스를 구현하는 객체 만들어 직렬화한 다음 전달
+      - 안드로이드는 유사한 Parcelable 인터페이스 권장. 다음 메서드를 모두 구현해야 한다.
+      
+            public abstract int describeContents()      //직렬화하려는 객체의 유형 구분
+            public abstract void writeToParcell(Parcel dest, int flags) //객체의 데이터를 Parcel객체로 만들어주는 역할
+            
+            + CREATOR 상수 정의
