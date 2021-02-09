@@ -185,4 +185,10 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
 - 중지(Stopped)   
     : 다른 액티비티에 의해 완전히 가려저 보이지 않는 상태.    
     
-      수명 주기 : 액티비티의 상태 정보가 변화하는 것
+      수명 주기 : 액티비티의 상태 정보가 변화하는 것   
+**onCreate -> onStart -> onResume -> onPause -> onStop -> onDestroy**      
+- 화면이 보일 때 : onCreat, onStart, onResume 순서로 호출      
+- 화면을 없앨 때 : onPause, onStop, onDestroy 순서로 호출      
+- 항상 호출되늰 것 : onResume, onPause -> 앱 데이터의 저장과 복원에 필요하기 때문       
+    Ex) 게임 중 사용자의 점수가 사라지지 않도록 하려면 onPause()안에 데이터 저장 - onResume()안에서 복원    
+- 앱 안에서 간단한 데이터를 저장하거나 복원할 때 = SharedPreferences 사용
