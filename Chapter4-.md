@@ -240,3 +240,49 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
 [ 프래그먼트의 특성 ]       
 - 뷰 특성 : 뷰 그룹에 추가되거나 레이아웃의 일부가 될 수 있음   
 - 액티비티 특성 : 액티비티처럼 수명주기를 갖고 있음      
+
+[ MainFragment.java 에서 ]    
+
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+        return inflater.inflate(R.layout.fragment_main, container, false);
+    }
+    
+- 메서드의 파라미터로 LayoutInflater 객체가 전달되므로 inflate()메서드 바로 호출 가능     
+- 첫번째 파라미터 : XML 레이아웃 파일    
+- 두번째 파라미터 : XML 레이아웃이 설정될 뷰그룹 객체, 프래그먼트의 가장 상위 레이아웃    
+
+[ 프래그먼트를 만들어 사용하는 과정 ]      
+1. 프래그먼트를 위한 XML 레이아웃 만들기   
+2. 프래그먼트 클래스 만들기    
+3. 액티비티를 XML 레이아웃에 추가하기     
+    
+[ 프래그먼트의 수명주기 메서드 ]     
+- onAttach(Activity)    
+    : 프래그먼트가 액티비티와 연결될 때 호출됨.   
+- onCreate(Bundle)      
+    : 프래그먼트가 초기화될 때 호출됨.    
+- onCreateView(LayoutInflator, ViewGroup, Bundle)   
+    : 프래그먼트와 관련되는 뷰 계층을 만들어서 리턴함.   
+- onActivityCreated(Bundle)     
+    : 프래그먼트와 연결된 액티비티가 onCreate() 메서드의 작업을 완료했을 때 호출됨.      
+- onStart()     
+    : 프래그먼트와 연결된 액티비티가 onStart()되어 사용자에게 프래그먼트가 보일 때 호출됨.   
+- onResume()    
+    : 프래그먼트와 연결된 액티비티가 onResume()되어 사용자와 상호작용할 수 있을 때 호출됨.      
+    
+[ 프래그먼트가 화면에서 보이지 않을 때 호출되는 상태 메서드 ]    
+- onPause()     
+    : 프래그먼트와 연결된 액티비티가 onPause()되어 사용자와 상호작용을 중지할 때 호출됨.    
+- onStop()      
+    : 프래그먼트와 연결된 액티비티가 onStop()되어 화면에서 더이상 보이지 않을 때나 기능이 중지되었을 때 호출됨.   
+- onDestroyView()   
+    : 프래그먼트와 관련된 뷰 리소스를 해제할 수 있도록 호출됨.      
+- onDestroy()       
+    : 프래그먼트의 상태를 마지막으로 정리할 수 있도록 호출됨.   
+- onDetach()    
+    : 프래그먼트가 액티비티와 연결을 끊기 전에 호출됨.   
+    
+**프래그먼트 객체가 new 연산자로 만들어졌더라도 액티비티에 올라가기 전까지는 동작하지 않음!**
+
+    MyFragment fragment = new MyFragment();     //객체는 만들어졌지만 프래그먼트로 동작하진 X
+    getSupportFagmentManager().begin.Transaction().add(fragment).commit();  //동작 O !
