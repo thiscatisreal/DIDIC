@@ -10,11 +10,16 @@ Do it! 안드로이드 프로그래밍
     4. [플래그와 부가 데이터](#플래그와-부가-데이터)      
     5. [태스크 관리](#태스크-관리)       
     6. [액티비티의 수명주기와 SharedPresferences](#액티비티의-수명주기와-SharedPresferences)
-5.    
+5. [프래그먼트](#5-프래그먼트)
+    1. [프래그먼트란?](#프래그먼트란)
+    2. [프래그먼트로 화면 만들기](#프래그먼트로-화면-만들기)
+    3. [액션바와 탭](#액션바와-탭)
+    4. [뷰페이저](#뷰페이저)
+    5. [바로가기 메뉴](#바로가기-메뉴)
 6.    
 7.    
 
-====
+****
 
 # 4. 여러 화면 간 전환하기
 ## 레이아웃 인플레이션
@@ -192,3 +197,46 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
 - 항상 호출되늰 것 : onResume, onPause -> 앱 데이터의 저장과 복원에 필요하기 때문       
     Ex) 게임 중 사용자의 점수가 사라지지 않도록 하려면 onPause()안에 데이터 저장 - onResume()안에서 복원    
 - 앱 안에서 간단한 데이터를 저장하거나 복원할 때 = SharedPreferences 사용
+
+****
+
+# 프래그먼트
+## 프래그먼트란?
+하나의 화면을 여러 부분으로 나눠서 보여주거나 각각의 부분 화면 단위로 바꿔서 보여주고 싶을 때 사용하는 것    
+태블릿처럼 큰 화면의 단말을 지원하려고 시작했는데 지금은 단말의 크기와 상관없이 화면 UI를 만들 때 많이 사용      
+프래그먼트는 하나의 화면 안에 들어가는 부분 화면과 같아서 하나의 레이아웃처럼 보이지만    
+액티비티처럼 독립적으로 동작하는 부분 화면을 만들 때 사용    
+
+[ 프래그먼트의 목적 ]   
+- 분할된 화면들을 독립적으로 구성하기 위해 사용     
+- 분할된 화면들의 상태를 관리하기 위해 사용   
+> 액티비티 화면 = 시스템에서 관리하는 화면
+<br> 프래그먼트 화면 = 액티비티 위에 올라가는 화면의 일부, 즉 부분 화면    
+
+[ 프래그먼트 클래스의 주요 메서드 ]   
+- public final Activity getActivity()   
+    : 이 프래그먼트를 포함하는 액티비티를 반환함.  
+- public final FragmentManager getFagmentManager()  
+    : 이 프래그먼트를 포함하는 액티비티에서 프래그먼트 객체들과 의사소통하는 프래그먼트 매니저를 반환함.    
+- public final Fragment getParentFragment()     
+    : 이 프래그먼트를 포함하는 부모가 프래그먼트일 경우 리턴. 액티비티면 null 반환.    
+- public final int getid()      
+    : 이 프래그먼트의 id 반환.   
+    
+프래그먼트는 LayoutInflater를 사용해 인플레이션(객체화) 진행해야 한다.      
+
+[ 프래그먼트 매니저 클래스의 주요 메서드 ]   
+- public abstract FragmentTransaction beginTransaction()    
+    : 프래그먼트 변경을 위한 트랜잭션 시작      
+- public abstract Fragment findFragmentById (int id)     
+    : ID를 이용해 프래그먼트 객체를 찾음.     
+- public abstract Fragment findFragmentByTag (String tag)   
+    : 태그 정보를 사용해 프래그먼트 객체를 찾음.      
+- public abstract boolean executePendingTransactions()      
+    : 트랜잭션은 commit() 메서드 호출시 비동기 방식으로 실행됨.      
+      즉시 실행하고 싶다면 이 메서드를 추가로 호출해야 함.    
+> getSupportFragmentManager() == getFragmentManager() 같은 기능의 메서드
+
+[ 프래그먼트의 특성 ]       
+- 뷰 특성 : 뷰 그룹에 추가되거나 레이아웃의 일부가 될 수 있음   
+- 액티비티 특성 : 액티비티처럼 수명주기를 갖고 있음      
