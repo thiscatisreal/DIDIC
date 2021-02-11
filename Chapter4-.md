@@ -338,7 +338,7 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
         android:title="새로고침"                        //메뉴에 표시되는 글자
         android:icon="@drawable/menu_refresh"          //icon 표시
         app:showAsAction="always"                      //항상 보이게
-        />
+    />
         
 [ showAsAction 속성 값 ]       
 - always : 항상 액션바에 아이템을 추가하여 표시     
@@ -354,3 +354,8 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
     boolean onOptionsItemSelected (MenuItem item)       //화면이 띄워진 후 메뉴를 바꾸고 싶을 때 사용
     void Activity.registerForContextMenu (View view)    //컨택스트 메뉴를 특정 뷰에 등록하고 싶을 때 사용
         
+[ 액션바 디스플레이 옵션 상수 ]     
+- DISPLAY_USE_OGO : 홈 아이콘 부분에 로고 아이콘 사용     
+- DISPLAY_SHOW_HOME : 홈 아이콘 표시      
+- DISPLAY_HOME_AS_UP : 홈 아이콘 부분에 뒤로가기 아이콘 표시        
+- DISPLAY_SHOW_TITLE : 타이틀 표시   
