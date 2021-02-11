@@ -288,3 +288,68 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
     getSupportFagmentManager().begin.Transaction().add(fragment).commit();  //동작 O !
 
 ## 프래그먼트로 화면 만들기
+[ 액티비티를 참조할 때 ]     
+- onAttach() 메서드로 전달되는 파라미터 참조      
+- getActivity() 메서드를 호출하여 반환되는 객체 참조    
+> 액티비티마다 다른 이름의 메서드를 만들면 확인의 번거로움이 있으므로 인터페이스 정의 후 액티비티가 구현하게 하는 것 간편
+
+[ 이미지를 보여주는 프래그먼트 ]     
+
+    public class ViewerFragment extends Fragment {
+        ImageView imageView;
+
+        public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle saveInstanceState){
+            ViewGroup rootView = (ViewGroup) inflater.inflate(R.layout.fragment_viewer, container, false);
+
+            imageView = rootView.findViewById(R.id.imageView);
+            return rootView;
+        }
+
+        public void setImage(int resId){
+            imageView.setImageResource(resId);
+        }
+    }
+    
+1. onCreateView() 메서드 안에서 인플레이션 진행      
+2. 이미지뷰 객체를 찾아 변수 할당        
+3. setImage() 메서드를 만들어 액티비티에서 설정 가능하게 함     
+
+## 액션바
+- 옵션 메뉴     
+    : 시스템 [메뉴] 버튼을 눌렀을 때 나타나는 메뉴로 각 화면마다 설정할 수 있는 주요 메뉴     
+- 컨텍스트 메뉴   
+    : 화면을 길게 누르면 나타나는 메뉴로 뷰에 설정하여 나타나게 할 수 있다. 텍스트뷰 편집 상태를 바꾸거나 할 때 사용      
+> 각각의 액티비티마다 설정 가능
+
+    public boolean onCreateOptionMenu (Menu menu)
+    public void onCreateContextMenu (ContextMenu menu, View v, ContextMenu.ContextMenulnfo menuInfo)
+    
+[ 메뉴 아이템에 추가할 수 있는 대표적인 메서드 ]       
+   
+    MenuItem add (int groupId, int itemId, int order, CharSequence title)       //groupId : 아이템을 하나의 값으로 묶을 때
+    MenuItem add (int groupId, int itemId, int order, int titleRes)             //itemId : 아이템이 갖는 고유 ID 값
+    SubMenu addSubMenu (int titleRes)                                           //아이템이 많아서 서브 메뉴로 추가하고 싶을 때
+    
+[ 아이템 생성 ]  
+
+    <item                                               //하나의 메뉴에 대한 정보 
+        android:id="@+id/menu_refresh"
+        android:title="새로고침"                        //메뉴에 표시되는 글자
+        android:icon="@drawable/menu_refresh"          //icon 표시
+        app:showAsAction="always"                      //항상 보이게
+        />
+        
+[ showAsAction 속성 값 ]       
+- always : 항상 액션바에 아이템을 추가하여 표시     
+- never : 액션바에 아이템을 추가하여 표시하지 않음(default)       
+- ifRoom : 액션바에 여유 공간이 있을 때만 아이템 표시     
+- withText : title 속성으로 설정된 제목을 같이 표시       
+- collapseActionView : 아이템에 설정한 뷰의 아이콘만 표시      
+
+**MainActivity.java에 재정의된 onCreateOptionMenu90 메서드가 액티비티에 만들어질 때 화면에 추가됨**     
+
+[ 기타 메서드 ]      
+
+    boolean onOptionsItemSelected (MenuItem item)       //화면이 띄워진 후 메뉴를 바꾸고 싶을 때 사용
+    void Activity.registerForContextMenu (View view)    //컨택스트 메뉴를 특정 뷰에 등록하고 싶을 때 사용
+        
