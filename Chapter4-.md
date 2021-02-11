@@ -286,3 +286,5 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
 
     MyFragment fragment = new MyFragment();     //객체는 만들어졌지만 프래그먼트로 동작하진 X
     getSupportFagmentManager().begin.Transaction().add(fragment).commit();  //동작 O !
+
+## 프래그먼트로 화면 만들기
