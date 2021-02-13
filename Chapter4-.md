@@ -355,7 +355,27 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
     void Activity.registerForContextMenu (View view)    //컨택스트 메뉴를 특정 뷰에 등록하고 싶을 때 사용
         
 [ 액션바 디스플레이 옵션 상수 ]     
-- DISPLAY_USE_OGO : 홈 아이콘 부분에 로고 아이콘 사용     
+- DISPLAY_USE_LOGO : 홈 아이콘 부분에 로고 아이콘 사용     
 - DISPLAY_SHOW_HOME : 홈 아이콘 표시      
 - DISPLAY_HOME_AS_UP : 홈 아이콘 부분에 뒤로가기 아이콘 표시        
-- DISPLAY_SHOW_TITLE : 타이틀 표시   
+- DISPLAY_SHOW_TITLE : 타이틀 표시
+
+### 탭
+상단이나 하단에 있는 영역으로 버튼을 사용해 화면 전환 가능. 내비게이션 위젯이라고도 부른다.    
+- CoordinatorLayout : 전체 화면의 위치를 잡아주는 역할        
+- AppBarLayout : 다른 레이아웃을 함께 넣으면 둘 간의 간격이나 위치가 자동으로 결정된다.       
+    ex) Toolbar, TabLayout, FrameLayout 등       
+    
+[ TabLayout에서 ]
+
+    app:tabGravity="fill"       //탭 버튼들이 동일한 크기를 갖게 함.
+    app:tabMode="fixed"
+    
+[ FrameLayout에서 ]
+   
+    android:id="@+id/container"     //프래그먼트 삽입 가능
+    
+[ BottomNavigationView에서 ]      
+- itemBackground : 각 탭의 배경색     
+- itemIconTint : 아이콘 색상     
+- itemTextColor : 텍스트 색상
