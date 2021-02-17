@@ -16,8 +16,14 @@ Do it! 안드로이드 프로그래밍
     3. [액션바와 탭](#액션바와-탭)
     4. [뷰페이저](#뷰페이저)
     5. [바로가기 메뉴](#바로가기-메뉴)
-6.    
-7.    
+6. [서비스와 수신자](#6-서비스와-수신자)      
+    1. [서비스](#서비스)      
+    2. [수신자](#수신자)
+    3. [위험권한](#위험권한)
+    4. [리소스와 매니페스트](#리소스와-매니페스트)
+    5. [그래들](#그래들)
+7.      
+    
 
 ****
 
@@ -414,3 +420,62 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
 - FragmentCallback 인터페이스 : 어떤 프래그먼트를 보여줄지 선택하는 메서드를 포함하는 인터페이스      
     - onFragmentSelected() : 해당 프래그먼트 화면에 표시
 > onNavigationItemSelected() 메서드에서 어떤 메뉴가 눌렸는지 구분하고 onFragmentSelected() 메서드 호츨해서 해당 프래그먼트 화면에 표시
+
+***
+
+# 6. 서비스와 수신자
+## 서비스
+백그라운드에서 실행되는 앱의 구성 요소로 서비스가 비정상적으로 종료되더라도 시스템이 자동으로 재실행한다.      
+- startService() : 서비스 시작, 인텐트 전달에 사용       
+- onStartCommand() : 서비스로 전달된 인텐트 객체를 처리하는 메서드      
+
+[ MainActivity.java에서 ]     
+
+    Intent intent = new Intent(getApplicationContext(), MyService.class);   //인텐트 객체 생성
+    intent.putExtra("command", "show");                                     //부가 데이터 넣기
+    intent.putExtra("name", name);
+
+[ MyService.java에서 ]
+
+    public int onStartCommand(Intent intent, int flags, int startId) {
+        Log.d(TAG, "onStartCommand() 호출됨.");                             //로그 출력
+
+        if(intent == null){                                                 //인텐트 객체가 비어있지 않으면 메서드 호출
+            return Service.START_STICKY;
+        } else {
+            processCommand(intent);
+        }
+        return super.onStartCommand(intent, flags, startId);
+    }
+
+- Binding : 서비스가 서버 역할을 하면서 액티비티와 연결될 수 있도록 만드는 것       
+- MainActivity가 메모리가 만들어져 있지 않은 상태에서 처음 만들어진다면 onCreat() - getIntent() 호출     
+- 메모리가 만들어져 있다면 onNewIntent() 호출. 인텐트 전달        
+- IntentService : 서비스와 달리 필요한 함수가 수행되고 나면 종료된다. 한 번 실행되고 끝나는 작업을 수행할 때 사용       
+
+## 수신자
+브로드캐스팅 : 메시지를 여러 객체에 전달하는 것     
+브로드캐스트 수신자는 매니페스트로 등록 x, 소스코드에서 registerReceiver() 사용해서 등록 o    
+-> 액티비티 안에서 브로드캐스트 메시지를 전달받아 바로 다른 작업을 수행할 수 있는 장점      
+
+    <intent-filter>                                                             //어떤 인텐트를 받을 것인지 지정
+         <action android:name="android.provider.Telephony.SMS_RECEIVED" />      //SMS를 전달받는 액션
+         
+[ SmsReceiver.java에서 ]      
+
+    Bundle bundle = intent.getExtras();                     //인텐트에서 Bundle 객체를 getExtras() 메서드로 참조
+    SmsMessage[] messages = parseSmsMessage(bundle);        //SMS 메시지 객체 생성
+    
+    Object[] objs = (Object[]) bundle.get("pdus");          //Bundle 객체의 부가데이터 중에서 pdus 가져오기
+    SmsMessage[] messages = new SmsMessage[objs.length]; 
+    
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){        //딘밀의 OS 버전 확인 (M : 마시멜로)
+            String format = bundle.getString("format");
+            messages[i] = SmsMessage.createFromPdu((byte[]) objs[i], format);
+        } else {
+            messages[i] = SmsMessage.createFromPdu((byte[]) objs[i]);
+        }
+        
+- onReceive() : SMS 데이터를 확인하기 위한 메서드 포함     
+    - getOriginatingAddress() ; 발신자 번호 확인       
+    - getMessageBody().toString() : 문자 내용 확인    
