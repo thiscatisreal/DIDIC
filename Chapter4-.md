@@ -379,3 +379,38 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
 - itemBackground : 각 탭의 배경색     
 - itemIconTint : 아이콘 색상     
 - itemTextColor : 텍스트 색상
+
+## 뷰페이저
+손가락을 좌우 스크롤하여 넘겨볼 수 있는 기능 제공
+
+    class MyPagerAdapter extends FragmentStatePagerAdapter{         //어댑터 : 뷰페이저에 보여줄 각 프래그먼트를 관리하는 역할
+        ArrayList<Fragment> items = new ArrayList<Fragment>();      //프래그먼트를 담아둘 객체
+        public MyPagerAdapter(FragmentManager fm){
+            super(fm);
+        }
+        
+        public void addItem(Fragment item){                         //프래그먼트 추가하는 메서드
+            items.add(item);
+        }
+
+        public Fragment getItem(int position){                      //프래그먼트 가져가는 메서드
+            return items.get(position);
+        }
+
+        public int getCount() {                                     //프래그먼트 갯수 확인하는 메서드
+            return items.size();
+        }
+    }
+    
+- setOffscreenPageLimit() : 미리 로딩해 놓을 아이템의 개수 선언    
+- TitleStrip : 전체 아이템 개수와 현재 보고 있는 아이템을 알려줌     
+
+## 바로가기 메뉴
+화면 좌측 상단에 위치한 햄버거 모양 아이콘을 눌렀을 때 나타나는 화면(NavigationDrawer)       
+[ AndroidManifest.xml 파일에서 ]    
+
+    android:theme="@style/AppTheme.NoActionBar"        //theme속성 설정. 직접 만든 테마를 설정하기 위함.
+    
+- FragmentCallback 인터페이스 : 어떤 프래그먼트를 보여줄지 선택하는 메서드를 포함하는 인터페이스      
+    - onFragmentSelected() : 해당 프래그먼트 화면에 표시
+> onNavigationItemSelected() 메서드에서 어떤 메뉴가 눌렸는지 구분하고 onFragmentSelected() 메서드 호츨해서 해당 프래그먼트 화면에 표시
