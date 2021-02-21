@@ -540,3 +540,72 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
             }
         }
     }
+### 위험 권한 자동 부여하는 방법
+[ MainActivity.xml 에서 ]     
+
+    AutoPermissions.Companion.loadAllPermissions(this,101);     //onCreate()메서드 안에. 자동부여 요청
+    
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){      //응답 처리
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults);
+        AutoPermissions.Companion.parsePermissions(this, requestCode, permissions, this);
+    }
+    
+## 리소스와 매니페스트
+### 매니페스트 
+설치된 앱의 구성 요소와 어떤 권한이 부여됐는지 시스템에 알려주는 파일     
+[ 매니페스트의 주요 역할 ]        
+- 앱의 패키지 이름 지정      
+- 앱 구성 요소에 대한 정보 등록     
+- 각 구성요소를 구현하는 클래스 이름 지정    
+- 앱이 가져야 하는 권한에 대한 정보 등록        
+- 다른 앱이 접근하기 위해 필요한 권한에 대한 정보 등록    
+- 앱 개발 과정에서 프로파일링을 위해 필요한 instrumentation 클래스 등록    
+- 앱에 필요한 안드로이드 API의 레벨 정보 등록    
+- 앱에서 사용하는 라이브러리 리스트    
+
+* 타이틀이나 아이코노가 같은 앱 자체의 정보를 속성으로 지정하고 리소스로 포함된 정보들은 "@drawable/"처럼 참조하여 지정   
+* <application> 태그는 매니페스트 안에 오직 하나이고 다른 구성 요소들은 여러번 추가되어도 괜찮다.      
+* 메인 액티비티의 형태는 항상 다음과 같아야 한다.
+
+        <activity android:name="org.techtown.hello.HelloActivity"
+                android:label="@string/app_name">
+            <intent-filter>                                                       //인텐트 필터에 들어가는 정보
+                <action android:name="andorid:intent.action.MAIN" />              //MAIN이어야 하고
+                <category android:name="android.intent.category.LAUNCHER" />      //카테고리는 LAUNCHER여야 한다.
+            </intent-filter>
+        </activity>
+        
+### 리소스
+/app/res 폴더 + /app/assets 폴더
+> asset은 동영상이나 웹페이지와 같이 용량이 큰 데이터를 의미한다.
+<br> 리소스는 빌드되어 설치 파일에 추가되지만 asset은 빌드되지 않는다.
+**리소스는 유형마다 다른 폴더에 넣어줘야 구분하기 쉽고 유지관리가 편하다.**        
+[ 리소스 폴더의 종류 ]      
+- /app/res/values : 문자열이나 기타 기본 데이터 타입에 해당하는 정보 저장      
+- /app/res/drawable : 이미지 저장. 해상도마다 xhdpi, hdpi, mdpi 등으로 나누어 저장        
+이렇게 저장된 리소스 정보를 코드에서 사용할 땐 Context.getResources() 메서드를 사용해 객체를 참조하여 읽어들여야 한다.       
+
+### 스타일과 테마
+여러가지 속성들을 한꺼번에 모아서 정의한 것으로 대표적인 예로 대화상자가 있다.    
+스타일을 직접 정의하려면 /app/res/values/styles.xml 파일을 만들어야 한다.
+
+    <style name="Alert" parent="android:Theme.Dialog">
+        <item name="android:windowBackground">@drawable/alertBackground</item>
+    </style>
+    
+위와 같이 정의한 속성들은 android:style 속성을 이용해 레이아웃에 즉시 적용 가능     
+
+## 그래들
+안드로이드 스튜디오에서 사용하는 빌드 및 배포 도구        
+그래들 파일은 프로젝트 수준과 모듈 수준으로 나눠 관리하기 때문에 새 프로젝트 생성시 두 개의 build.gradle 파일 생성됨.   
+1. build.gradle     
+    - 프로젝트 안에 들어있는 모든 모듈에 적용되는 설정 담고 있다.    
+    - 이 파일을 수정하는 경우는 거의 없다.     
+2. build.gradle(Module:app)     
+    - 각각의 모듈에 대한 설정을 담고 있다.     
+    - applicationId : 앱의 id값으로 전세계에서 유일한 값으로 설정되어야 한다.      
+    - compileSdkVersion : 빌드를 진행할 때 어떤 버전의 SDK를 사용할 것인지 지정. 보통 최신 버전의 SDK 지정한다.     
+    - mindSdkVersion : 어떤 하위 버전까지 지원하도록 할 것인지 지정한다.     
+    - targetSdkVersion : 검증된 버전이 어떤 SDK 버전인지 지정. 해당 SDK에서 검증되지 않은 앱은 이전 버전으로 지정 가능하다.               - dependencies : 외부 라이브러리 추가 가능.    
+3. settings.gradle : 어떤 모듈을 포함할 것인지에 대한 정보
+
