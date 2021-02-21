@@ -479,3 +479,64 @@ singleInstance로 설정하면 이 액티비티가 실행되는 시점에 새로
 - onReceive() : SMS 데이터를 확인하기 위한 메서드 포함     
     - getOriginatingAddress() ; 발신자 번호 확인       
     - getMessageBody().toString() : 문자 내용 확인    
+
+### SMS 내용 액티비티에 나타내기
+1. 브로드캐스트 수신자는 화면이 없으므로 보여주려는 화면을 액티비티로 만든 후 띄워야 한다.        
+2. 브로드캐스트 수신자에서 인텐트 객체 생성 - startActivity() 사용해 객체 전달       
+
+        private void sendToActivity(Context context, String sender, String contents, Date receivedDate){
+            Intent myIntent = new Intent(context, SmsActivity.class);
+
+            myIntent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK|                                 //인텐트에 플래그 추가
+                    Intent.FLAG_ACTIVITY_SINGLE_TOP|Intent.FLAG_ACTIVITY_CLEAR_TOP);
+
+            myIntent.putExtra("sender",sender);
+            myIntent.putExtra("contents",contents);
+            myIntent.putExtra("receivedDate",format.format(receivedDate));
+
+            context.startActivity(myIntent);
+        }
+        
+> SimpleDateFormat : 날짜와 시간을 원하는 형태의 문자열로 만들 때 사용한다.
+<br> Ex) public SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+
+### 브로드캐스트 수신자 동작 방식 정리
+- 단말에서 SMS 문자를 받았을 때 텔레포니 모듈이 처리    
+- 처리된 정보는 인텐트에 담겨 브로드캐스팅 방식으로 다른 앱에 전달      
+- 전달받은 앱은 onReceive() 메서드가 자동 호출    
+- 인텐트 전달 -> SmsReceiver 객체에서 데이터 확인 후 SmsActivity로 전달       
+
+## 위험 권한
+- 일반 권한 : 앱 설치시 사용자에게 권한 부여를 묻고 설치      
+- 위험 권한 : 앱 실행시 사용자에게 권한 부여를 묻고 동작      
+[ 대표적인 위험 권한 ]      
+- LOCATION      
+- CAMERA    
+- MICROPHONE    
+- CONTACTS      
+- PHONE     
+- SMS       
+- CALENDAR      
+- SENSORS   
+- STORAGE     
+
+### SD카드 접근 권한 부여하는 방법
+[ AndroidManifest.xml에서 ]       
+
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>      //SD카드 읽기 권한
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE"/>     //SD카드 쓰기 권한
+    
+[ MainActivity.java에서 ]     
+
+    public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults){  //권한 수락 여부 파악
+        switch (requestCode){
+            case 101: {
+                if(grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED){
+                    Toast.makeText(this, "첫 번째 권한을 사용자가 승인함.", Toast.LENGTH_LONG).show();
+                } else{
+                    Toast.makeText(this, "첫 번째 권한 거부됨.", Toast.LENGTH_LONG).show();
+                }
+                return;
+            }
+        }
+    }
