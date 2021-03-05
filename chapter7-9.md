@@ -111,6 +111,22 @@ Do it! 안드로이드 프로그래밍
         public void setMobile(String mobile){
             textView2.setText(mobile);
         }
-    
-    
-    
+- onCreate() 메서드에서
+
+        Layout1 layout1 = findViewById(R.id.layout1);               //XML레이아웃에 추가한 뷰 참조
+        
+        layout1.setImage(R.drawable.ic_launcher_foreground);        //뷰의 메서드 호출하여 데이터 설정
+        layout1.setName("김민수");
+        layout1.setMobile("010-1000-1000");
+
+## 리싸이클러뷰
+리스트 : 모바일 단말에서 가장 많이 사용되는 UI 모양 중 하나로 여러 아이템 중 하나를 선택할 수 있는 세로 모양으로 된 화면 컨트롤
+> 스마트폰의 사용성을 높이기 위해 !
+- 안드로이드에서는 위와 같은 리스트를 선택 위젯이라고 부름 !     
+- Selection Widget : 원본 데이터를 뷰에 직접 넣지 않고 어댑터라는 클래스를 사용함     
+- getView() : 어댑터에서 가장 중요한 메서드로 이 메서드에서 반환하는 뷰가 하나의 아이템으로 디스플레이된다.      
+> 반환하는 객체가 텍스트뷰면 선택 위젯의 각 아이템은 텍스트뷰로 표시됨.
+<br> 레이아웃처럼 컨테이너 객체라면 하나의 아이템에 여러 정보를 보여줄 수 있음.
+**리싸이클러뷰 : 상하스크롤이나 좌우스크롤 사용 가능. 캐시 매커니즘으로 구현**
+
+
