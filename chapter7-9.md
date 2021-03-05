@@ -14,3 +14,21 @@ Do it! 안드로이드 프로그래밍
 ---
 # 7. 선택 위젯 만들기
 ## 나인패치 이미지
+이미지뷰를 XML 레이아웃에 추가해서 화면에 보여줄 때 이미지가 나타나는 영역보다 원본 이미지가 작으면 시스템이 이미지 크기를 자동으로 늘려준다. 이 기능은 해상도가 다른 단말에서도 일정한 비율로 이미지의 크기를 지정하면 이미지가 자동으로 그 크기에 맞게 늘어나거나 줄어들게 하므로 유용한 기능 ! BUT, 이 과정에서 이미지의 일부분이 깨져보이거나 왜곡이 발생하는 문제 발생      
+=> **나인 패치로 해결 !**      
+[ 나인 패치 이미지 만드는 방법 ]        
+1. png나 jpg와 같은 이미지보다 가로, 세로 크기가 2px씩 큰 이미지를 새로 만든다.        
+2. 원본 이미지를 가운데에 복사한다.   
+3. 수정한 이미지 파일을 ~.9.png로 파일 확장자 앞에 '.9'를 붙여 저장한다.    
+4. 가장자리 한 픽셀씩을 흰색 또는 검은색으로 변경 가능 !      
+
+[ 뷰의 배경으로 색상과 이미지를 지정하는 메서드 ]       
+
+    void setBackgroundColor (int color)
+    void setBackgroundDrawable (Drawable d)
+    void setBackgroundResource (int resid)      //XML 레이아웃의 background 속성과 같음
+    
+## 새로운 뷰 만들기
+
+    public void onMeasure (int widthMeasureSpec, int heightMeasureSpec)
+    public void onDraw (Canvas canvas)
