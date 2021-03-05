@@ -46,7 +46,20 @@ Do it! 안드로이드 프로그래밍
 - 안드로이드 UI 객체를 만들 때 Context 객체를 전달받도록 되어 있으므로 생성자는 항상 Context 객체가 전달되어야 한다.     
 - 파라미터 AttributeSet : XML 레이아웃에서 태그에 추가하는 속성을 전달받기 위한 것
 - 초기화를 위한 메서드 정의
+ 
+        private void init(Context context){
+            setBackgroundColor(Color.CYAN);
+            setTextColor(Color.BLACK);
 
+            float textSize = getResources().getDimension(R.dimen.text_size);
+            setTextSize(textSize);
+        }
+- values/dimens.xml : 크기 값 등을 정할 수 있는 파일
+
+        <?xml version="1.0" encoding="utf-8" ?>
+        <resources>
+            <dimen name="text_size">16sp</dimen>
+        </resources>
     
       
       
