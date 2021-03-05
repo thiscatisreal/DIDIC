@@ -61,10 +61,56 @@ Do it! 안드로이드 프로그래밍
             <dimen name="text_size">16sp</dimen>
         </resources>
     
-      
-      
-    
-    
+[ 버튼이 눌렸을 때 색깔 바꾸기 ]    
+
+    public boolean onTouchEvent(MotionEvent event) {
+        int action = event.getAction();                 //손가락으로 눌린 상태를 전달 받음
+
+        switch(action) {
+            case MotionEvent.ACTION_DOWN:               //누르고 있을 때
+                setBackgroundColor(Color.BLUE);         //배경 파란색, 글자 빨간색으로 변경
+                setTextColor(Color.RED);
+                break;                                  //멈춤
+                
+            case MotionEvent.ACTION_OUTSIDE:            //그 외의 액션들
+            case MotionEvent.ACTION_CANCEL:
+            case MotionEvent.ACTION_UP:
+                setBackgroundColor(Color.CYAN);         //배경 옅은 파란색, 글자 검은색으로 변경
+                setTextColor(Color.BLACK);
+
+                break;
+        }
+        invalidate();                                   //뷰 다시 그림 -> onDraw() 메서드 동작
+        return true;
+    }
+## 레이아웃 정의하고 카드뷰 넣기
+카드뷰 : 프로필과 같은 간단 정보를 넣기 위해 각 영역을 구분하는 역할        
+
+[ LinearLayout class를 상속하는 새로운 클래스 정의하기 ]       
+
+- 초기화 : XML 레이아웃 파일을 인플레이션해서 이 소스파일과 매칭될 수 있도록 한다.
+
+        private void init(Context context){
+            LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+            inflater.inflate(R.layout.layout, this, true);
+            
+            imageView = findViewById(R.id.imageView);       //XML 레이아웃에서 정의했던 뷰 참조
+            textView = findViewById(R.id.textView);
+            textView2 = findViewById(R.id.textView2);
+        }
+- 새로 정의한 뷰는 메인 레이아웃에 추가되어 사용할 것이므로 소스코드에서 이미지뷰의 이미지나 텍스트뷰의 글자를 바꿀 수 있도록 메서드 정의
+
+        public void setImage(int resId){
+            imageView.setImageResource(resId);          //drawable 속 이미지 파일 참조하는 정수 값을 파라미터로 받음
+        }
+
+        public void setName(String name){
+            textView.setText(name);
+        }
+
+        public void setMobile(String mobile){
+            textView2.setText(mobile);
+        }
     
     
     
