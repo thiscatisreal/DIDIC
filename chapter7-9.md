@@ -30,5 +30,28 @@ Do it! 안드로이드 프로그래밍
     
 ## 새로운 뷰 만들기
 
-    public void onMeasure (int widthMeasureSpec, int heightMeasureSpec)
-    public void onDraw (Canvas canvas)
+    public void onMeasure (int widthMeasureSpec, int heightMeasureSpec)      //뷰가 스스로의 크기를 정할 때 자동으로 호출되는 메서드
+    public void onDraw (Canvas canvas)                                       //스스로를 레이아웃에 맞게 그릴 때 호출되는 메서드
+    
+- onMeasure() 메서드의 파라미터로 전달되는 것 : 뷰에게 허용되는 여유 공간과 폭의 넓이에 대한 정보      
+- 레이아웃에게 뷰의 크기를 반환하고 싶다면
+
+      void setMeasuredDimension (int measuredWidth, int measuredHeigt)
+      
+### 새로운 뷰를 만든다는 것은 ...
+새로운 뷰를 클래스로 정의하고 그 안에 onDraw() 메서드를 다시 정의한 후 필요한 코드를 넣어 기능을 구현하면 다른 모양으로 보이는 뷰 생성 !     
+이때 onDraw() 메서드는 새로 정의한 뷰가 화면에 보이기 전에 호출되므로, 메서드 안에서 원하는 모양의 그래픽을 화면에 그리면 그 모양대로 화면에 표현 가능!     
+
+### 새로운 클래스에서 ...
+- 안드로이드 UI 객체를 만들 때 Context 객체를 전달받도록 되어 있으므로 생성자는 항상 Context 객체가 전달되어야 한다.     
+- 파라미터 AttributeSet : XML 레이아웃에서 태그에 추가하는 속성을 전달받기 위한 것
+- 초기화를 위한 메서드 정의
+
+    
+      
+      
+    
+    
+    
+    
+    
