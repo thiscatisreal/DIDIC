@@ -127,6 +127,23 @@ Do it! 안드로이드 프로그래밍
 - getView() : 어댑터에서 가장 중요한 메서드로 이 메서드에서 반환하는 뷰가 하나의 아이템으로 디스플레이된다.      
 > 반환하는 객체가 텍스트뷰면 선택 위젯의 각 아이템은 텍스트뷰로 표시됨.
 <br> 레이아웃처럼 컨테이너 객체라면 하나의 아이템에 여러 정보를 보여줄 수 있음.
-**리싸이클러뷰 : 상하스크롤이나 좌우스크롤 사용 가능. 캐시 매커니즘으로 구현**
+**리싸이클러뷰 : 상하스크롤이나 좌우스크롤 사용 가능. 캐시 매커니즘으로 구현**      
+[ 어댑터에서 구현되어야 하는 중요한 메서드 ]      
+- getItemCount() : 어댑터에서 관리하는 아이템의 개수 반환    
+- onCreateViewHolder() : 각 아이템을 위해 정의한 XML 레이아웃을 이용해 뷰 객체 생성        
+- onBindViewHolder() : 뷰홀더가 재사용될 때 호출되며 뷰객체는 기존 것을 그대로 사용하고 데이터만 바꿔줌
+> 두 메서드는 뷰홀더 객체가 만들어질 때와 재사용될 때 자동으로 호출된다.
+<br> 뷰 객체를 재사용하는 이유 : 메모리를 효율적으로 사용하기 위해
 
+- 어댑터는 리싸이클러뷰 객체에 설정되어야 하고, 어댑터 안에 객체들을 만들어 넣어야 하므로 MainActivity에       
+
+        LinearLayoutManager layoutManager = new LinearLayoutManager(this, LinearLayoutManager.VERTICAL, false);
+        recyclerView.setLayoutManager(layoutManager);               //리싸이클러뷰에 레이아웃 매니저 설정
+        
+        recyclerView.setAdapter(adapter);                           //리싸이클러뷰에 어댑터 설정
+        
+- 레이아웃 매니저 : 리싸이클러뷰가 보일 기본적이 형태 설정. 세로, 가로, 격자모양을 자주 사용함.       
+    - VERTICAL : 세로     
+    - HORIZONTAL : 가로   
+    - GridLayoutManager : 격자. 칼럼수 지정
 
