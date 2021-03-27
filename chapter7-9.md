@@ -10,6 +10,11 @@ Do it! 안드로이드 프로그래밍
     4. [리싸이클러뷰](#리싸이클러뷰)    
     5. [스피너](#스피너)      
 8. [애니메이션과 다양한 위젯](#8-애니메이션과-다양한-위젯)        
+    1. [애니메이션](#애니메이션)      
+    2. [페이지 슬라이딩](#페이지-슬라이딩)        
+    3. [앱-화면에-웹브라우저-넣기](#앱-화면에-웹브라우저-넣기)        
+    4. [시크바](#시크바)      
+    5. [키패드-제어](#키패드-제어)        
 
 ---
 # 7. 선택 위젯 만들기
@@ -169,4 +174,5 @@ Do it! 안드로이드 프로그래밍
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
     
-
+# 8. 애니메이션과 다양한 위젯  
+## 애니메이션
