@@ -338,7 +338,7 @@ getSystemService() 메서드 참조 후 InputMethodManager 객체를 사용해 �
     - phone : 전화번호로 표시      
     - time : 시간     
     - date : 날짜     
-    
+
         if(getCurrentFocus()!=null){
             InputMethodManager inputMethodManager = (InputMethodManager)    //InputMethodManager 객체 참조
             getSystemService(INPUT_METHOD_SERVICE);
