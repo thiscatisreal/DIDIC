@@ -328,15 +328,16 @@ Animation Set으로 여러 개의 효과를 하나로 묶어 동시 수행되도
 getSystemService() 메서드 참조 후 InputMethodManager 객체를 사용해 키패드 기능 제어        
 
 [ 대표적인 inputType 속성 ]
-- number : 숫자       
-- numberSigned : 0보다 큰 숫자       
-- numberDecimal : 정수        
-- text : 텍스트        
-- textPassword : 패스워드로 표시   
-- textEmailAddress : 이메일로 표시    
-- phone : 전화번호로 표시      
-- time : 시간     
-- date : 날짜     
+
+    - number : 숫자       
+    - numberSigned : 0보다 큰 숫자       
+    - numberDecimal : 정수        
+    - text : 텍스트        
+    - textPassword : 패스워드로 표시   
+    - textEmailAddress : 이메일로 표시    
+    - phone : 전화번호로 표시      
+    - time : 시간     
+    - date : 날짜     
     
         if(getCurrentFocus()!=null){
             InputMethodManager inputMethodManager = (InputMethodManager)    //InputMethodManager 객체 참조
