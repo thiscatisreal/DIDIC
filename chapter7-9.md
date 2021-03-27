@@ -259,4 +259,13 @@ Animation Set으로 여러 개의 효과를 하나로 묶어 동시 수행되도
         public void onAnimationEnd(Animation animation) : 끝났을 때 호출
         public void onAnimationRepeat(Animation animation) : 반복될 때 호출
 
+## 페이지 슬라이딩
+버튼을 눌렀을 때 보이지 않던 뷰가 슬라이딩 방식으로 나타나는 기능       
+데이터를 좀 더 효율적으로 보여주기 위한 UI 구성에 사용        
 
+    SlidingPageAnimationListener animationListener = new SlidingPageAnimationListener();        //리스너 설정
+        translateLeftAnim.setAnimationListener(animListener);
+        translateRightAnim.setAnimationListener(animListener);
+        
+    public void onAnimationEnd(Animation animation){                            //끝났을 때 호출되는 메서드 안에 코드 넣기
+            if(isPageOpen){ page.setVisibility(View.INVISIBLE);
