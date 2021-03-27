@@ -156,5 +156,17 @@ Do it! 안드로이드 프로그래밍
 ## 스피너
 : 윈도우에선 콤보박스로 불린다. 아이폰이나 안드로이드 단말에서는 쉽게 터치할 수 있도록 별도의 창으로 선택할 수 있는 데이터 아이템들로 표현된다.      
 
+    spinner.setAdapter(adapter);        //스피너에 어댑터 설정하기
+     spinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {       //스피너에 리스너 설정하기
+            public void onItemSelected(AdapterView<?> adapterView, View view, int position, long id){
+                textView.setText(items[position]);
+            }
+            
+- 스피너 객체도 선택 위젯이므로 setAdapter() 메서드의 파라미터로 어댑터 객체를 전달해야 한다.     
+- API 제공 기본 어댑터 ArrayAdapter를 사용하면 simple_spinner_item이라는 레이아웃 지정(문자열을 아이템으로 보여주는)      
+- setDropDownViewResource() : 스피너 항목을 선택하는 창을 위한 레이아웃   
 
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+    
 
