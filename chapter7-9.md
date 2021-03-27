@@ -269,3 +269,78 @@ Animation Set으로 여러 개의 효과를 하나로 묶어 동시 수행되도
         
     public void onAnimationEnd(Animation animation){                            //끝났을 때 호출되는 메서드 안에 코드 넣기
             if(isPageOpen){ page.setVisibility(View.INVISIBLE);
+            
+## 앱 화면에 웹브라우저 
+앱 안에 웹브라우저를 띄우면 더 자연스러운 화면을 보여줄 수 있다.       
+
+[ 매니페스트에 등록해야 할 인터넷 권한 ]
+
+    <user-permission android:name="android.permission.INTERNET" />
+    
+    <application
+        android:usesCleartextTraffic="true"
+    
+[ MainActivity.java ]
+
+    WebSettings webSettings = webView.getSettings();                        //웹뷰 설정 수정하기
+    webSettings.setJavaScriptEnabled(true);                                 //자바 스크립트가 동작할 수 있는 환경
+
+    button.setOnClickListener(new android.view.View.OnClickListener() {     //버튼 클릭 시 사이트 로딩
+        @Override
+        public void onClick(View v) {
+            webView.loadUrl(editText.getText().toString());
+        }
+    });
+    
+> 대부분의 웹사이트가 자바 스크립트를 사용하므로 항상 setJavaScriptEnabled(true)로 설정하는 게 좋다.       
+- loadUrl() : 웹페이지를 로딩하여 화면에 보여주기 위한 메서드    
+- 웹뷰 객체의 goForward()나 goBack() 메서드를 이용하면 앞/뒤 페이지로 이동 가능     
+- 화면에 추가된 WebView 객체에 웹페이지를 보여주기 위해서는 WebViewClient를 상속한 객체를 만들어 WebView에 설정해야 한다.     
+
+### 웹뷰 응용
+- 컨텐츠가 자주 변하는 경우 서버에서 컨텐츠 관리 가능     
+- 앱 가이드나 메시지 중간에 색상이나 링크를 넣고 싶을 때 유용    
+- 웹페이지와 앱 사이에 데이터 주고받기 가능       
+
+
+## 시크바
+프로그레스바를 확장하여 만든 상태 표시 위젯으로 사용자가 값을 조정할 수 있다.
+
+    seekBar.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {      //시크바에 리스너 설정
+        @Override
+        public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+            setBrightness(i);
+            textView.setText("변경된 값 : " + i);
+        }
+        
+    private void setBrightness(int value){                                         //윈도우 매니저를 이용해 밝기 설정
+        if(value < 10){
+            value = 10;
+        }else if (value > 100){
+            value = 100;
+        }
+        WindowManager.LayoutParams params = getWindow().getAttributes();
+        params.screenBrightness = (float)value/100;
+        getWindow().setAttributes(params);
+    }
+    
+## 키패드 제어
+getSystemService() 메서드 참조 후 InputMethodManager 객체를 사용해 키패드 기능 제어        
+
+[ 대표적인 inputType 속성 ]
+- number : 숫자       
+- numberSigned : 0보다 큰 숫자       
+- numberDecimal : 정수        
+- text : 텍스트        
+- textPassword : 패스워드로 표시   
+- textEmailAddress : 이메일로 표시    
+- phone : 전화번호로 표시      
+- time : 시간     
+- date : 날짜     
+    
+        if(getCurrentFocus()!=null){
+            InputMethodManager inputMethodManager = (InputMethodManager)    //InputMethodManager 객체 참조
+            getSystemService(INPUT_METHOD_SERVICE);
+            
+            inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);   //키패드 감추기
+        }
