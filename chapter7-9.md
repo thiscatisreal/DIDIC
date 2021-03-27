@@ -176,3 +176,87 @@ Do it! 안드로이드 프로그래밍
     
 # 8. 애니메이션과 다양한 위젯  
 ## 애니메이션
+### 트윈 애니메이션
+안드로이드에서 간단하게 움직이거나 확대/축소를 가능하게 하는 애니메이션     
+### 사용하기
+1. 애니메이션이 어떻게 동작할지 XML로 정의      
+2. XML 파일을 자바 소스에서 애니메이션 객체로 로딩 -> startAnimation() 메서드를 사용해 애니메이션 동작       
+### 대상과 효과
+[ 대상 ]      
+    - 뷰 : 위젯과 레이아웃 모두 포함    
+    - 그리기 객체 : 다양한 드로어블에 적용 가능. ShapeDrawable, BitmapDrawable 등     
+[ 효과 ]      
+    - 위치 : Translate로 정의하면 대상의 위치 이동        
+    - 확대/축소 : Scale로 정의하면 대상의 크기를 키우거나 줄이는 데 사용      
+    - 회전 : Rotate로 정의하면 대상을 회전시키는 데 사용      
+    - 투명도 : Alpha로 정의하면 대상의 투명도 조절에 사용      
+
+### 1.XML 리소스 정의
+애니메이션을 위한 XML파일은 /app/res/anim 폴더 밑에 둬야 한다.     
+Animation Set으로 여러 개의 효과를 하나로 묶어 동시 수행되도록 하는 게 가능하다.        
+애니메이션이 끝난 후 똑같이 거꾸로 적용하면 자연스럽게 원상복귀 가능하다.       
+[ scale.xml ]
+
+    <scale
+        android:duration="2500"         //지속시간. startOffset : 애니메이션이 시작되기까지의 시간(없으면 즉시 시작)
+        android:pivotX="50%"            //크기를 변경하려는 축의 정보
+        android:pivotY="50%"
+        android:fromXScale="1.0"        //시작할 때의 확대/축소 비율
+        android:fromYScale="1.0"
+        android:toXScale="2.0"          //끝날 때의 확대/축소 비율
+        android:toYScale="2.0"
+        />
+        
+[ translate.xml ]
+
+    <translate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromXDelta = "0%p"      //시작위치
+    android:toXDelta="-100%p"       //종료위치 (왼쪽으로)
+    android:duration="20000"        //20초
+    android:repeatCount="-1"        //무한반복
+    android:fillAfter="true"        //애니메이션이 끝난 후 대상이 원래대로 돌아오는 것을 막기 위함
+    />
+    
+[ rotate.xml ]
+
+    <rotate xmlns:android="http://schemas.android.com/apk/res/android"
+    android:fromDegrees="0"         //회전 각도. 0 -> -360 : 왼쪽으로 한바퀴
+    android:toDegrees="360"
+    android:pivotX="50%"            //대상의 중심축
+    android:pivotY="50%"
+    android:duration="10000"        //10초
+    >
+
+[ alpha.xml ]
+
+    <alpha
+        android:fromAlpha="1.0"
+        android:toAlpha="0.0"
+        android:duration="10000"
+        />
+        
+### 2.애니메이션 객체에 로딩
+
+    Animation anim = AnimationUtils.loadAnimation(getApplicationContext(),R.anim.scale);
+    
+### 인터폴레이터
+애니메이션 효과가 지속되는 동안 속도 조절     
+- accelerate_interpolator : 점점 빠르게      
+- decelerate_interpolator : 점점 느리게      
+- accelerate_decelerate_interpolator : 점점 빠르다가 느리게      
+- anticipate_interpolator : 시작 위치에서 조금 뒤로 당겼다가 시작하도록        
+- overshoot_interpolator : 종료 위치에서 조금 지나쳤다가 종료되도록       
+- anticipate_overshoot_interpolator : 시작 위치에서 조금 뒤로 당겼다가 시작 & 종료 위치에서 조금 지나쳤다가 종료되도록    
+- bounce_interpolator : 종료 위치에서 튀도록     
+
+> 각각의 액션에 설정할 시 shareInterpolator 속성을 false로 설정     
+
+### 애니메이션 호출 시점
+- onWindowFocusChanged() : 사용자에게 화면이 표시되는 시점        
+- AnimationListener 객체 : 애니메이션이 언제 시작/끝났는지에 대한 정보       
+    
+        public void onAnimationStart(Animation animation) : 시작되기 전에 호출
+        public void onAnimationEnd(Animation animation) : 끝났을 때 호출
+        public void onAnimationRepeat(Animation animation) : 반복될 때 호출
+
+
