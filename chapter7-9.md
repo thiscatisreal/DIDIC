@@ -14,7 +14,13 @@ Do it! 안드로이드 프로그래밍
     2. [페이지 슬라이딩](#페이지-슬라이딩)        
     3. [앱 화면에 웹브라우저 넣기](#앱-화면에-웹브라우저-넣기)        
     4. [시크바](#시크바)      
-    5. [키패드 제어](#키패드-제어)        
+    5. [키패드 제어](#키패드-제어)      
+9. [스레드와 핸들러 이해하기](#9-스레드와-핸들러-이해하기)
+    1. [핸들러](#핸들러)
+    2. [일정시간 후에 실행하기](#일정시간-후에-실행하기)
+    3. [스레드로 메시지 전송하기](#스레드로-메시지-전송하기)
+    4. [AsyncTask](#AsyncTask)
+    5. [스레드로 애니메이션 만들기](#스레드로-애니메이션-만들기)
 
 ---
 # 7. 선택 위젯 만들기
@@ -173,6 +179,8 @@ Do it! 안드로이드 프로그래밍
 
         ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+
+---
     
 # 8. 애니메이션과 다양한 위젯  
 ## 애니메이션
@@ -347,3 +355,17 @@ getSystemService() 메서드 참조 후 InputMethodManager 객체를 사용해 �
             
             inputMethodManager.hideSoftInputFromWindow(getCurrentFocus().getWindowToken(),0);   //키패드 감추기
         }
+        
+---
+# 9.스레드와 핸들러 이해하기
+- 스레드 : 동시 수행이 가능한 작업 단위    
+- 데드락 : 동시에 두 곳 이상에서 요청이 생겼을 때 어떤 것을 먼저 처리할지 판단할 수 없어 발생하는 시스템 상의 문제        
+
+## 핸들러
+- 메인 스레드 : 안드로이드에서 UI를 처리할 때 사용되는 기본 스레드      
+- 핸들러 : 새로 생성한 다른 스레드에서 메시지를 전달해 메인 스레드에서 처리할 수 있게 하는 객체        
+
+**안드로이드의 스레드 = 표준 자바의 스레드**     
+[ 스레드 사용하기 ]    
+new 연산자로 객체 생성 -> start() 메서드 호출     
+
