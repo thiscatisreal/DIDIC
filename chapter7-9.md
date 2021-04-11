@@ -369,3 +369,58 @@ getSystemService() 메서드 참조 후 InputMethodManager 객체를 사용해 �
 [ 스레드 사용하기 ]    
 new 연산자로 객체 생성 -> start() 메서드 호출     
 
+    button.setOnClickListener(new View.OnClickListener() {              //버튼을 누르면 스레드 객체 생성&시작
+            @Override
+            public void onClick(View v) {
+                BackgroundThread thread = new BackgroundThread();
+                thread.start();
+            }
+        });
+        
+핸들러 : 실행하려는 특정 기능이 있을 때 핸들러가 포함된 스레드에서 순차적으로 실행시킬 때 사용 !        
+> 특정 메시지가 미래의 어떤 시점에 실행되도록 스케쥴링 가능      
+
+    class BackgroundThread extends Thread{
+        int value = 0;
+        
+        public void run(){
+            for(int i=0; i<100; i++){
+                try {
+                    Thread.sleep(1000);
+                } catch(Exception e){}
+
+                value += 1;
+                Log.d("Thread","value : " + value);
+                
+                Message message = handler.obtainMessage();      //메시지 객체 참조
+                Bundle bundle = new Bundle();
+                bundle.putInt("value",value);
+                message.setData(bundle);
+                
+                handler.sendMessage(message);                   //메시지큐로 전송
+            }
+        }
+    }
+    
+    class MainHandler extends Handler {
+        public void handleMessage(Message msg){                 //핸들러 안에서 전달받은 메시지 객체 처리 
+            super.handleMessage(msg);
+            
+            Bundle bundle = msg.getData();
+            int value = bundle.getInt("value");
+            textView.setText("value 값: " + value);
+        }
+    }
+### Runnable 객체
+Runnable 객체를 핸들러의 post() 메서드로 전달해주면 이 객체에 정의된 run() 메서드 안의 코드들 -> 메인 스레드에서 실행됨.     
+
+    Handler handler = new Handler();        //API의 기본 핸들러 객체 생성
+    
+    handler.post(new Runnable(){            //핸들러의 post() 메서드 호출
+        public void run(){
+            textView.setText("value 값: " + value);
+        }
+    });
+> 더 간결해서 이 방법을 더 많이 사용      
+
+## 
