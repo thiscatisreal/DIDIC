@@ -470,13 +470,7 @@ AsyncTask 클래스를 상속하면 그 안에 스레드를 위한 코드와 UI 
  : 백그라운드 작업의 진행 상태를 표시하기 위해 호출. 작업 수행 중간에 UI 객체에 접근하는 경우 사용. publishProgress() 메서드 호출해야 사용 가능       
 - onPostExecute     
  : 백그라운드 작업 끝난 후 호출. 메인 스레드에서 실행되며 메모리 리소스를 해제하는 등의 작업에 사용됨. 결과는 Result 타입의 파라미터로 전달됨.      
-        
- 
-     button2.setOnClickListener(new View.OnClickListener(){                 //버튼 누를 시 테스크 작업 취소
-            public void onClick(View v){
-                task.cancel(true);
-            }
-        });
+       
 
     class BackgroundTask extends AsyncTask<Integer, Integer, Integer> {     //백그라운드 작업 수행 클래스
         protected void onPreExecute() {                                     
@@ -511,3 +505,9 @@ AsyncTask 클래스를 상속하면 그 안에 스레드를 위한 코드와 UI 
 
 > < 자료형1, 자료형2, 자료형3 > = 재정의할 새로운 클래스의 메서드가 어떤 자료형의 파라미터를 가질 것인지 명시     
 순서대로 doInBackground(), onProgressUpdate(), onPostExecute()의 파라미터 결정
+
+    button2.setOnClickListener(new View.OnClickListener(){                 //버튼 누를 시 테스크 작업 취소
+            public void onClick(View v){
+                task.cancel(true);
+            }
+        });
