@@ -507,7 +507,19 @@ AsyncTask 클래스를 상속하면 그 안에 스레드를 위한 코드와 UI 
 순서대로 doInBackground(), onProgressUpdate(), onPostExecute()의 파라미터 결정
 
     button2.setOnClickListener(new View.OnClickListener(){                 //버튼 누를 시 테스크 작업 취소
-            public void onClick(View v){
-                task.cancel(true);
-            }
-        });
+        public void onClick(View v){
+            task.cancel(true);
+        }
+    });
+
+## 스레드로 애니메이션 만들기
+여러 이미지를 연속해서 바꿔가며 애니메이션 효과 만들기 -> 스레드 최고 !      
+
+    AnimThread thread = new AnimThread();               //애니메이션을 위한 스레드 객체 생성&실행
+    thread.start();
+    
+    handler.post(new Runnable() {                       //화면에 이미지를 보여주기 위해 핸들러의 post() 메서드 호출
+        public void run() {
+            imageView.setImageDrawable(drawable);
+         }
+    });
